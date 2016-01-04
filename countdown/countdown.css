@@ -10,7 +10,7 @@
     padding-left:96px;
     text-align: center;
     font-family: Rokkitt, serif;
-    color:black;
+    color:black!important;
     text-decoration: none!important;
     white-space: nowrap;
     font-weight: bold;
@@ -60,7 +60,7 @@
 .bcbCountdown::after {
     content:"Rebecca Don't Hurt 'Em";
     font-family: serif;
-    color:white;
+    color:white!important;
     background-color:black;
     box-sizing:border-box;
     height:20px;
