@@ -7,8 +7,8 @@ function bcbCountdown(element, config) {
         }).filter(function (event) { return event.time.valueOf() > Date.now(); })[0];
         if (!event) return;
         var $timeLeft = $('<div>').addClass('timeLeft');
-        $(element).addClass('bcbCountdown').append($('<div>').addClass('title').text(event.title))
-            .append($('<div>').addClass('subtitle').text(event.subtitle))
+        $(element).addClass('bcbCountdown').append($('<div>').addClass('title').text(event.title || "New Episode"))
+            .append($('<div>').addClass('subtitle').text(event.subtitle || "The Feels Awaken"))
             .append($timeLeft).addClass('style' + Math.floor(Math.random() * styles));
         function updateTime() {
             var duration = (event.time.valueOf() - Date.now()) / 1000;
