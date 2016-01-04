@@ -22,7 +22,7 @@ function bcbCountdown(element, config, theme) {
             $timeLeft.html("<span>" + [24, 60, 60, 1].map(function (num, base, segments) {
                 for (var d = duration, i = base; i < segments.length; i++) d /= segments[i];
                 if (base) d %= segments[base - 1];
-                return Math.floor(d);
+                return (d < 10 ? "0" : "") + Math.floor(d);
             }).join("</span>:<span>") + "</span>");
         }
         updateTime();
