@@ -5,6 +5,7 @@
     height: 96px;
     display:block;
     position: relative;
+    top:-20px;
     background-color:white;
     border:3px solid black;
     padding-left:96px;
