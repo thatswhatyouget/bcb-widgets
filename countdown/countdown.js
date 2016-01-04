@@ -6,10 +6,10 @@ function bcbCountdown(element, config) {
             return { time: new Date(parts.pop()), title: parts.shift(), subtitle: parts.join('~') };
         }).filter(function (event) { return event.time.valueOf() > Date.now(); })[0];
         if (!event) return $(element).hide();
-        var $timeLeft = $('<div>').addClass('timeLeft');
+        var $timeLeft = $('<div>').addClass('timeLeft'), theme = Math.floor(Math.random() * themes);
         $(element).addClass('bcbCountdown').append($('<div>').addClass('title').text(event.title || "New Episode"))
             .append($('<div>').addClass('subtitle').text(event.subtitle || "The Feels Awaken"))
-            .append($timeLeft).addClass('theme' + Math.floor(Math.random() * themes));
+            .append($timeLeft).addClass('theme' + theme);
         function updateTime() {
             var duration = (event.time.valueOf() - Date.now()) / 1000;
             if (duration < 0) {
@@ -24,7 +24,19 @@ function bcbCountdown(element, config) {
             }).join("</span>:<span>") + "</span>");
         }
         updateTime();
-        var interval = setInterval(updateTime, 1000);
+        var interval = setInterval(updateTime, 1000), pressed = [], unlocked = false;
+        $(window).keydown(function (e) {
+            pressed.push(String.fromCharCode(e.which).toUpperCase());
+            if (pressed.length > 5) pressed.shift();
+            if (pressed.join('') == "SUGAR") unlocked = true;
+            if (unlocked && [37, 39].indexOf(e.which) >= 0) {
+                $(element).removeClass("theme" + theme);
+                theme += e.which - 38;
+                theme %= themes;
+                while (theme < 0) theme += themes;
+                $(element).addClass("theme" + theme);
+            }
+        });
     }
     catch (e) {
         if (typeof(debug) !== "undefined" && debug) {
