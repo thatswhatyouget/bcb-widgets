@@ -1,5 +1,5 @@
 function bcbCountdown(element, config) {
-    var styles = 11;
+    var themes = 12;
     try {
         var event = config.split("\n").map(function (line) {
             var parts = line.split('~');
@@ -9,7 +9,7 @@ function bcbCountdown(element, config) {
         var $timeLeft = $('<div>').addClass('timeLeft');
         $(element).addClass('bcbCountdown').append($('<div>').addClass('title').text(event.title || "New Episode"))
             .append($('<div>').addClass('subtitle').text(event.subtitle || "The Feels Awaken"))
-            .append($timeLeft).addClass('style' + Math.floor(Math.random() * styles));
+            .append($timeLeft).addClass('theme' + Math.floor(Math.random() * themes));
         function updateTime() {
             var duration = (event.time.valueOf() - Date.now()) / 1000;
             if (duration < 0) {

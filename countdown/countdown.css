@@ -76,32 +76,35 @@
     font-weight: normal;
 }
 
-.bcbCountdown.style1::before { background-image: url("img/gregrose.gif"); }
-.bcbCountdown.style1::after { content:"Thanks For Fixing My Van" }
+.bcbCountdown.theme1::before { background-image: url("img/gregrose.gif"); }
+.bcbCountdown.theme1::after { content:"Thanks For Fixing My Van" }
 
-.bcbCountdown.style2::before { background-image: url("img/amethyst.gif"); }
-.bcbCountdown.style2::after { content:"(Breathing Intensifies)" }
+.bcbCountdown.theme2::before { background-image: url("img/amethyst.gif"); }
+.bcbCountdown.theme2::after { content:"(Breathing Intensifies)" }
 
-.bcbCountdown.style3::before { background-image: url("img/pearl.gif"); }
-.bcbCountdown.style3::after { content:"Aw Jeez, Here We Go Again" }
+.bcbCountdown.theme3::before { background-image: url("img/pearl.gif"); }
+.bcbCountdown.theme3::after { content:"Aw Jeez, Here We Go Again" }
 
-.bcbCountdown.style4::before { background-image: url("img/garnet.gif"); }
-.bcbCountdown.style4::after { content:"Brace Yourselves" }
+.bcbCountdown.theme4::before { background-image: url("img/garnet.gif"); }
+.bcbCountdown.theme4::after { content:"Brace Yourselves" }
 
-.bcbCountdown.style5::before { background-image: url("img/malachite.gif"); }
-.bcbCountdown.style5::after { content:"Let The Water Hold Me Down" }
+.bcbCountdown.theme5::before { background-image: url("img/malachite.gif"); }
+.bcbCountdown.theme5::after { content:"Let The Water Hold Me Down" }
 
-.bcbCountdown.style6::before { background-image: url("img/peridot.gif"); }
-.bcbCountdown.style6::after { content:"Singing While Crying" }
+.bcbCountdown.theme6::before { background-image: url("img/peridot.gif"); }
+.bcbCountdown.theme6::after { content:"Singing While Crying" }
 
-.bcbCountdown.style7::before { background-image: url("img/lapis.gif"); }
-.bcbCountdown.style7::after { content:"And Prom's Tomorrow!" }
+.bcbCountdown.theme7::before { background-image: url("img/lapis.gif"); }
+.bcbCountdown.theme7::after { content:"And Prom's Tomorrow!" }
 
-.bcbCountdown.style8::before { background-image: url("img/jasper.gif"); }
-.bcbCountdown.style8::after { content:"Fresh Pain Awaits" }
+.bcbCountdown.theme8::before { background-image: url("img/jasper.gif"); }
+.bcbCountdown.theme8::after { content:"Fresh Pain Awaits" }
 
-.bcbCountdown.style9::before { background-image: url("img/ruby.gif"); }
-.bcbCountdown.style9::after { content:"Try To Control Yourself" }
+.bcbCountdown.theme9::before { background-image: url("img/ruby.gif"); }
+.bcbCountdown.theme9::after { content:"Try To Control Yourself" }
 
-.bcbCountdown.style10::before { background-image: url("img/sapphire.gif"); }
-.bcbCountdown.style10::after { content:"You Know, A Kids Show!" }
+.bcbCountdown.theme10::before { background-image: url("img/sapphire.gif"); }
+.bcbCountdown.theme10::after { content:"You Know, A Kids Show!" }
+
+.bcbCountdown.theme11::before { background-image: url("img/rebecca.jpg"); }
+.bcbCountdown.theme11::after { content:"Crying is Really Funny" }
