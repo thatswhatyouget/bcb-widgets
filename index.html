@@ -12,7 +12,10 @@
             <a href="http://doafhat.com/post/135588250298/all-the-edited-stevenbomb-4-countdowns-for-your" target="_blank" id="bcb-countdown">
                 <script src="countdown/countdown.js"></script>
                 <link href="countdown/countdown.css" rel='stylesheet' type='text/css'/>
-                <script>bcbCountdown('#bcb-countdown',"StevenBomb ~ The Answer ~ Jan 4, 2016 5:30:00 PM EST\nStevenBomb ~ Steven's Birthday ~ Jan 5, 2016 5:30:00 PM EST\nStevenBomb ~ It Could Have Been Great ~ Jan 6, 2016 5:30:00 PM EST\nStevenBomb ~ Message Received ~ Jan 7, 2016 5:30:00 PM EST\nStevenBomb ~ Log Date 7 15 2 ~ Jan 8, 2016 5:30:00 PM EST\n", "");</script>
+                <script>
+                    var dates = Array.prototype.concat.apply([],[0,1].map(function(y) { return [0,1,2,3,4,5,6,7,8,9,10,11].map(function(m) { return new Date(new Date().getUTCFullYear() + y, m).toISOString();})}));
+                    bcbCountdown('#bcb-countdown',dates, "");
+                </script>
             </div>
         </section>
     </body>

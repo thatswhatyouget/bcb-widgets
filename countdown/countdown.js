@@ -2,11 +2,11 @@ function bcbCountdown(element, config, theme) {
     var themes = 12;
     try {
         theme = theme == "0" ? 0 : parseInt(theme || '') || -1;
-        var event = config.split("\n").map(function (line) {
+        var event = (Array.isArray(config) ? config : config.split("\n")).map(function (line) {
             var parts = line.split('~');
             return { time: new Date(parts.pop()), title: parts.shift(), subtitle: parts.join('~') };
         }).filter(function (event) { return event.time.valueOf() > Date.now(); })[0];
-        if (!event) return $(element).hide();
+        if (!event) return $(element).slideUp();
         var $timeLeft = $('<div>').addClass('timeLeft');
         if (theme < 0 || theme >= themes) theme = Math.floor(Math.random() * themes);
         $(element).addClass('bcbCountdown').append($('<div>').addClass('title').text(event.title || "New Episode"))
