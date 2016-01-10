@@ -89,7 +89,7 @@
 .bcbCountdown.theme4::after { content:"Brace Yourselves" }
 
 .bcbCountdown.theme5::before { background-image: url("img/malachite.gif"); }
-.bcbCountdown.theme5::after { content:"Let The Water Hold Me Down" }
+.bcbCountdown.theme5::after { content:"Let The Water Hold Me Down"; letter-spacing: -.03em; }
 
 .bcbCountdown.theme6::before { background-image: url("img/peridot.gif"); }
 .bcbCountdown.theme6::after { content:"Singing While Crying" }
