@@ -41,8 +41,8 @@ function bcbCountdown(element, config, theme) {
         });
     }
     catch (e) {
-        if (typeof(debug) !== "undefined" && debug) {
+        if (typeof (debug) !== "undefined" && debug) {
             console.error(e);
         }
-     }
+    }
 }

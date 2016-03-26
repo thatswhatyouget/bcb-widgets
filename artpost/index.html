@@ -1,0 +1,119 @@
+<html ng-app="artApp">
+
+<head>
+    <title>Beach City Bugle Art Post Builder</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
+    <script src="artpost.js"></script>
+    <style>
+        body {
+            background-color: #303843;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        section {
+            border: 1px solid black;
+            margin: auto;
+            width: 900px;
+            background-color: white;
+            padding: 1em;
+            padding-top:0;
+        }
+        
+        section.construct > div {
+            margin:1em 0;   
+        }
+        
+        section.html {
+            text-align: center;   
+        }
+        
+        section h3 {
+            text-align: center;   
+        }
+        
+        section label {
+            text-align: right;
+            width:150px; 
+            display: inline-block;  
+        }
+        
+        section input {
+            width: 500px;
+        }
+        
+        section textarea {
+            width: 80%;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body ng-controller="ArtPostController as artPost">
+    <section class="construct">
+        <h3>Build</h3>
+        <div>
+            <label>Text:</label>
+            <input type="text" ng-model="artPost.text" />
+        </div>
+        <div ng-repeat="art in artPost.art track by $index">
+            <label>Source {{$index + 1}}:</label>
+            <input type="url" ng-model="art.source" />
+            <button ng-click="artPost.Remove($index)">Delete</button>
+            <br/>
+            <label>Image {{$index + 1}}:</label>
+            <input type="url" ng-model="art.image" /><br/>
+            <label>Alt Text {{$index + 1}}:</label>
+            <input type="text" ng-model="art.caption" />
+        </div>
+        <div>
+            <label>Source {{artPost.art.length + 1}}:</label>
+            <input type="url" ng-model="artPost.nextSource" />
+            <button ng-click="artPost.Add()">Add</button>
+            <br/>
+        </div>
+        <label>Destroy:</label><button ng-click="artPost.Clear()">Clear</button>
+        If you do this by mistake, refresh the page to undo the clearing.
+    </section>
+    <section class="output">
+        <h3>Preview</h3>
+        <div ng-repeat="art in artPost.art track by $index">
+            <div ng-if="$first">
+                <div class="separator" style="text-align: center;">
+                    <a href="{{art.image}}" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" title="{{art.caption}}">
+                        <img border="0" src="{{art.image}}" style="max-width:640px" alt="{{art.caption}}" />
+                    </a>
+                </div>
+                <br /> {{artPost.text}}
+                <br />
+                <br />
+                <b><a href="{{art.source}}">Source {{$index + 1}}</a></b>
+                <br />
+                <br />
+            </div>
+            <div ng-if="!$first">
+                <hr />
+                <b><a href="{{art.source}}">Source {{$index + 1}}</a></b>
+                <br />
+                <div class="separator" style="text-align: center;">
+                    <a href="{{art.image}}" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" title="{{art.caption}}">
+                        <img border="0" src="{{art.image}}" style="max-width:640px" alt="{{art.caption}}" />
+                    </a>
+                </div>
+                <br />
+            </div>
+        </div>
+    </section>
+    <section class="html">
+        <h3>HTML</h3>
+        <textarea id="html">{{artPost.outputHtml()}}</textarea><br/>
+        <button class="clipboard" data-clipboard-target="#html">Copy to Clipboard</button>
+    </section>
+    
+    <script>
+        new Clipboard('.clipboard');
+    </script>
+</body>
+
+</html>
