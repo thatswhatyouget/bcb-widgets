@@ -62,7 +62,7 @@ function scrape(link) {
         page = page.replace(/\n/g, '');
         try {
             var image = findImg.exec(page)[1];
-            var caption = findDesc.exec(page)[1];
+            var caption = $("<div>").html(findDesc.exec(page)[1]).text();
         } catch (e) {
             console.log(page);
         }
