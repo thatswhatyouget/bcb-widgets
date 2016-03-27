@@ -11,18 +11,6 @@ angular.module('artApp', [])
         artPost.text = localStorage.getItem("artPost.text") || "Check out all of the absolutely amazing artwork on display tonight!";
         artPost.nextSource = "";
         artPost.outputHtml = function() {
-            $("section.output").find('img').each(function() {
-                var $img = $(this), width = $img.width(), height = $img.height(), ratio = width / height;
-                if (height > width) {
-                    height = 640;
-                    width = height / ratio;
-                }
-                else {
-                    width = 640;
-                    height = width * ratio;
-                }
-                $img.width(width).height(height);
-            });
             var $output = $("section.output").clone();
             $output.find('h3').remove();
             $output.contents().filter(function() { return this.nodeType == Node.COMMENT_NODE; }).remove();
