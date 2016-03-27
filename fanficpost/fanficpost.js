@@ -4,52 +4,64 @@ function Art(source, image, caption) {
     this.caption = caption;
 }
 
-angular.module('artApp', [])
-    .controller('ArtPostController', function($scope) {
-        var artPost = this;
-        artPost.art = JSON.parse(localStorage.getItem("artPost.art") || '[]') || [];
-        artPost.text = localStorage.getItem("artPost.text") || "Check out all of the absolutely amazing artwork on display tonight!";
-        artPost.nextSource = "";
-        artPost.outputHtml = function() {
+function Category(name, color, selected) {
+    this.name = name;
+    this.color = color;
+    this.selected = selected || false;
+    this.cleanName = function() {
+        return this.name.replace(/[^A-Z0-9]/ig, '');
+    }        
+}
+
+angular.module('fanficApp', [])
+    .controller('FanficPostController', function($scope) {
+        var fanficPost = this;
+        fanficPost.art = null;
+        fanficPost.categories = [
+            new Category("Adventure", "#45818e"),
+            new Category("Comedy", "#f1c232"),
+            new Category("Crossover", "#3d85c6"),
+            new Category("Dark", "#cc0000"),
+            new Category("Random", "#674ea7"),
+            new Category("Sad", "magenta"),
+            new Category("Shipping", "orange"),
+            new Category("Slice of Life", "#6aa84f")
+        ];
+        fanficPost.description = '';
+        fanficPost.getDescription = function() {
+            return fanficPost.description.replace('\n', '<br/>');
+        }            
+        fanficPost.author = '';
+        fanficPost.title = '';
+        fanficPost.url = '';
+        fanficPost.newArt = '';
+        this.outputHtml = function() {
             $("section.output").find('img').each(function() {
                 var $img = $(this), width = $img.width(), height = $img.height(), ratio = width / height;
                 if (height > width) {
-                    height = 640;
+                    height = 400;
                     width = height / ratio;
                 }
                 else {
-                    width = 640;
+                    width = 400;
                     height = width * ratio;
                 }
                 $img.width(width).height(height);
-            });
+            });                
             var $output = $("section.output").clone();
             $output.find('h3').remove();
             $output.contents().filter(function() { return this.nodeType == Node.COMMENT_NODE; }).remove();
             $output.children().contents().filter(function() { return this.nodeType == Node.COMMENT_NODE; }).remove();
-            $output.children('div').first().after("<!--more-->");
             $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if');
             return $output.html().trim();
         }
-        artPost.Add = function() {
-            if (!artPost.nextSource) return;
-            scrape(artPost.nextSource).then(function(art) {
-                artPost.art.push(art);
+        this.AddArt = function() {
+            if (!fanficPost.newArt) return;
+            scrape(fanficPost.newArt).then(function(art) {
+                fanficPost.art = art;
                 $scope.$apply();
-                Save();
             });
-            artPost.nextSource = '';
-        }
-        artPost.Remove = function(index) {
-            artPost.art.splice(index, 1);
-            Save();
-        }
-        artPost.Clear = function() {
-            artPost.art = [];
-        }
-        function Save() {
-            localStorage.setItem("artPost.art", JSON.stringify(artPost.art));
-            localStorage.setItem("artPost.text", artPost.text);
+            fanficPost.newArt = '';
         }
     });
 

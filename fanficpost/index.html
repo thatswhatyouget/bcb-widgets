@@ -1,0 +1,138 @@
+<html ng-app="fanficApp">
+
+<head>
+    <title>Beach City Bugle Fanfic Post Builder</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
+    <script src="fanficpost.js"></script>
+    <style>
+        body {
+            background-color: #303843;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        section {
+            border: 1px solid black;
+            margin: auto;
+            width: 900px;
+            background-color: white;
+            padding: 1em;
+            padding-top: 0;
+        }
+        
+        section.construct > div {
+            margin: 1em 0;
+        }
+        
+        section.html {
+            text-align: center;
+        }
+        
+        section h3 {
+            text-align: center;
+        }
+        
+        section ul {
+            columns: 4;
+            display: inline-block;
+            vertical-align: top;
+            margin:0;
+            list-style: none;
+        }
+        
+        section label {
+            text-align: right;
+            width: 150px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        
+        section input, section textarea {
+            width: 500px;
+            vertical-align: top;
+        }
+        
+        section.html textarea {
+            width: 80%;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body ng-controller="FanficPostController as fanficPost">
+    <section class="construct">
+        <h3>Build</h3>
+        <div>
+            <label>New Image Source:</label>
+            <input type="url" ng-model="fanficPost.newArt" />
+            <button ng-click="fanficPost.AddArt()">Scan</button>
+            <br/>
+        </div>
+        <div ng-if="fanficPost.art">
+            <label>Image Source:</label>
+            <input type="url" ng-model="fanficPost.art.source" />
+            <br/>
+            <label>Image Link:</label>
+            <input type="url" ng-model="fanficPost.art.image" />
+            <br/>
+            <label>Alt Text:</label>
+            <input type="text" ng-model="fanficPost.art.caption" />
+        </div>
+        <div>
+            <label>Title:</label>
+            <input type="text" ng-model="fanficPost.title" />
+            <br/>
+            <label>Link:</label>
+            <input type="url" ng-model="fanficPost.url" />
+            <br/>
+            <label>Categories:</label>
+            <ul>
+            <li ng-repeat="category in fanficPost.categories">
+                <input type="checkbox" ng-model="category.selected" id="cat{{category.cleanName()}}" style="width:auto;">
+                <label for="cat{{category.cleanName()}}" style="color:{{category.color}}; font-weight:bold; width:auto;">{{category.name}}&nbsp;&nbsp;</label>
+            </li>
+            </ul><br/>
+            <label>Author:</label>
+            <input type="text" ng-model="fanficPost.author" />
+            <br/>
+            <label>Description:</label>
+            <textarea ng-model="fanficPost.description"></textarea>
+        </div>
+    </section>
+    <section class="output">
+        <h3>Preview</h3>
+        <div class="separator" style="text-align: center;" ng-if="fanficPost.art">
+            <a href="{{fanficPost.art.source}}" target="_blank">
+                <img alt="{{fanficPost.art.caption}}" border="0" src="{{fanficPost.art.image}}" title="{{fanficPost.art.caption}}" />
+            </a>
+        </div>
+        <b ng-repeat="category in fanficPost.categories" ng-if="category.selected" style="background-color: white; border: 0px; box-sizing: border-box; color: {{category.color}}; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 23.8px; margin: 0px; padding: 0px; text-align: justify;"><span style="border: 0px; box-sizing: border-box; margin: 0px; padding: 0px;">[{{category.name}}]&nbsp;</b>
+        <br />
+        <br />
+        <div style="text-align: justify;">
+            <span style="font-family: &quot;helvetica neue&quot; , &quot;helveticaneue&quot; , &quot;helvetica&quot; , &quot;arial&quot; , sans-serif;">
+                <span style="background-color: white; font-size: 14px; line-height: 23.8px;"><b>Author:&nbsp;</b></span>
+                <span style="font-size: 14px; line-height: 23.8px;">{{fanficPost.author}}</span>
+            </span>
+        </div>
+        <blockquote class="tr_bq" style="text-align: justify;">
+            <span style="font-family: &quot;helvetica neue&quot; , &quot;helveticaneue&quot; , &quot;helvetica&quot; , &quot;arial&quot; , sans-serif;">
+                <span style="font-size: 14px; line-height: 23.8px; white-space:pre-line;"><b>Description:&nbsp;</b>{{fanficPost.description}}</span>
+            </span>
+        </blockquote>
+        <b><a href="{{fanficPost.url}}" target="_blank">{{fanficPost.title}}</a></b>
+    </section>
+    <section class="html">
+        <h3>HTML</h3>
+        <textarea id="html">{{fanficPost.outputHtml()}}</textarea>
+        <br/>
+        <button class="clipboard" data-clipboard-target="#html">Copy to Clipboard</button>
+    </section>
+
+    <script>
+        new Clipboard('.clipboard');
+    </script>
+</body>
+
+</html>
