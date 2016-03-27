@@ -27,6 +27,7 @@ angular.module('fanficApp', [])
             new Category("Shipping", "orange"),
             new Category("Slice of Life", "#6aa84f")
         ];
+        fanficPost.selectedCategories = function() { return fanficPost.categories.filter(function(c) { return c.selected; }).length; };
         fanficPost.description = '';
         fanficPost.getDescription = function() {
             return fanficPost.description.replace('\n', '<br/>');
@@ -34,6 +35,7 @@ angular.module('fanficApp', [])
         fanficPost.author = '';
         fanficPost.title = '';
         fanficPost.url = '';
+        fanficPost.additionalTags = '';
         fanficPost.newArt = '';
         this.outputHtml = function() {
             $("section.output").find('img').each(function() {

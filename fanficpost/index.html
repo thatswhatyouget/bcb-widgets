@@ -98,6 +98,9 @@
             <br/>
             <label>Description:</label>
             <textarea ng-model="fanficPost.description"></textarea>
+            <br/>
+            <label>Additional Tags:</label>
+            <input type="text" ng-model="fanficPost.additionalTags" />
         </div>
     </section>
     <section class="output">
@@ -107,21 +110,24 @@
                 <img alt="{{fanficPost.art.caption}}" border="0" src="{{fanficPost.art.image}}" title="{{fanficPost.art.caption}}" />
             </a>
         </div>
-        <b ng-repeat="category in fanficPost.categories" ng-if="category.selected" style="background-color: white; border: 0px; box-sizing: border-box; color: {{category.color}}; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 23.8px; margin: 0px; padding: 0px; text-align: justify;"><span style="border: 0px; box-sizing: border-box; margin: 0px; padding: 0px;">[{{category.name}}]&nbsp;</b>
-        <br />
-        <br />
-        <div style="text-align: justify;">
-            <span style="font-family: &quot;helvetica neue&quot; , &quot;helveticaneue&quot; , &quot;helvetica&quot; , &quot;arial&quot; , sans-serif;">
-                <span style="background-color: white; font-size: 14px; line-height: 23.8px;"><b>Author:&nbsp;</b></span>
-                <span style="font-size: 14px; line-height: 23.8px;">{{fanficPost.author}}</span>
-            </span>
+        <span ng-if="fanficPost.selectedCategories()" style="font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 23.8px;">
+            <b ng-repeat="category in fanficPost.categories" ng-if="category.selected" style="color: {{category.color}};">
+                [{{category.name}}]
+            </b>
+            <br/>        
+        </span>
+        <div style="text-align: justify; font-size: 14px; line-height: 23.8px; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif;" ng-if="fanficPost.author">
+            <br />
+            <b>Author:&nbsp;</b>{{fanficPost.author}}
         </div>
-        <blockquote class="tr_bq" style="text-align: justify;">
-            <span style="font-family: &quot;helvetica neue&quot; , &quot;helveticaneue&quot; , &quot;helvetica&quot; , &quot;arial&quot; , sans-serif;">
-                <span style="font-size: 14px; line-height: 23.8px; white-space:pre-line;"><b>Description:&nbsp;</b>{{fanficPost.description}}</span>
-            </span>
+        <blockquote ng-if="fanficPost.description" class="tr_bq" style="text-align: justify; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 23.8px; ">
+            <span style="white-space:pre-line;"><b>Description:&nbsp;</b>{{fanficPost.description}}</span>
         </blockquote>
-        <b><a href="{{fanficPost.url}}" target="_blank">{{fanficPost.title}}</a></b>
+        <b ng-if="fanficPost.url"><a href="{{fanficPost.url}}" target="_blank">{{fanficPost.title}}</a></b>
+        <div ng-if='fanficPost.additionalTags' style="text-align: justify; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 23.8px;">
+            <br/>
+            <b>Additional Tags:&nbsp;</b>{{fanficPost.additionalTags}}
+        </div>
     </section>
     <section class="html">
         <h3>HTML</h3>
