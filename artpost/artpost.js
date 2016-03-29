@@ -16,7 +16,7 @@ angular.module('artApp', [])
             $output.contents().filter(function() { return this.nodeType == Node.COMMENT_NODE; }).remove();
             $output.children().contents().filter(function() { return this.nodeType == Node.COMMENT_NODE; }).remove();
             $output.children('div').first().after("<!--more-->");
-            $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if');
+            $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if').removeAttr('bcb-sizing');
             return $output.html().trim();
         }
         artPost.Add = function() {
@@ -39,10 +39,31 @@ angular.module('artApp', [])
             localStorage.setItem("artPost.art", JSON.stringify(artPost.art));
             localStorage.setItem("artPost.text", artPost.text);
         }
-    });
+    }).directive('bcbSizing', function() {
+        function link(scope, element, attrs) {
+            var dimension = attrs.bcbSizing || 400;
+            var force = attrs.bcbSizingForce;
+            var $img = $(element);
+            $img.on('load', function() {
+                var width = $img[0].naturalWidth || $img.width(), height = $img[0].naturaHeight || $img.height(), ratio = width / height;
+                if (height < dimension && width < dimension && !force);
+                else if (height > width) {
+                    height = dimension;
+                    width = height * ratio;
+                }
+                else {
+                    width = dimension;
+                    height = width / ratio;
+                }
+                $img.attr("width", Math.floor(width));
+                scope.$apply();
+            });
+        }
 
-var findDesc = /\<meta\s*property=\"og:description\"\s*content=\"(.*?)\"\s*\/\>/ig;
-var findImg = /\<meta\s*property=\"og:image\"\s*content=\"(.*?)\"\s*\/\>/ig;
+        return {
+            link: link
+        };
+    });
 
 function scrape(link) {
     var deferred = $.Deferred();
@@ -59,13 +80,16 @@ function scrape(link) {
             timeout: 1000
         });
     }).then(function(page) {
-        page = page.replace(/\n/g, '');
-        try {
-            var image = findImg.exec(page)[1];
-            var caption = $("<div>").html(findDesc.exec(page)[1]).text();
-        } catch (e) {
-            console.log(page);
-        }
+        var doc = document.implementation.createHTMLDocument(), image = '', caption = '';
+        doc.documentElement.innerHTML = page;
+        [].concat.apply([], doc.getElementsByTagName("meta")).forEach(function(meta) {
+            switch (meta.getAttribute("property")) {
+                case "og:image":
+                    return image = meta.getAttribute("content");
+                case "og:description":
+                    return caption = $('<div>').html(meta.getAttribute("content")).text();
+            }
+        });
         deferred.resolve(new Art(link, image, caption));
     }, function() {
         deferred.resolve(new Art(link));

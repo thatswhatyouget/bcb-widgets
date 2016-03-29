@@ -105,16 +105,15 @@
     </section>
     <section class="output">
         <h3>Preview</h3>
-        <div class="separator" style="text-align: center;" ng-if="fanficPost.art">
+        <div class="separator" style="text-align: center;" ng-if="fanficPost.art && fanficPost.art.image">
             <a href="{{fanficPost.art.source}}" target="_blank">
-                <img alt="{{fanficPost.art.caption}}" border="0" src="{{fanficPost.art.image}}" title="{{fanficPost.art.caption}}" />
+                <img alt="{{fanficPost.art.caption}}" border="0" src="{{fanficPost.art.image}}" title="{{fanficPost.art.caption}}" bcb-sizing="400" />
             </a>
         </div>
         <span ng-if="fanficPost.selectedCategories()" style="font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 23.8px;">
             <b ng-repeat="category in fanficPost.categories" ng-if="category.selected" style="color: {{category.color}};">
                 [{{category.name}}]
-            </b>
-            <br/>        
+            </b>      
         </span>
         <div style="text-align: justify; font-size: 14px; line-height: 23.8px; font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif;" ng-if="fanficPost.author">
             <br />
