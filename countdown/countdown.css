@@ -38,9 +38,14 @@
     font-weight: 600;
     margin-top:-3px;
 }
-.bcbCountdown .timeLeft span {
+.bcbCountdown .timeLeft span, .bcbCountdown .timeLeft:hover span:hover {
     width:1.2em;
     display: inline-block;
+    opacity:1;
+    transition:opacity .2s ease-in-out;
+}
+.bcbCountdown .timeLeft:hover span {
+    opacity: .4;
 }
 
 .bcbCountdown::before {
@@ -58,7 +63,7 @@
     left:-3px;
     top:-3px;
 }
-.bcbCountdown::after {
+.bcbCountdown::after, .bcbCountdown .timeLeft:hover:after, .bcbCountdown .timeLeft:hover span:hover:after {
     content:"Rebecca Don't Hurt 'Em";
     font-family: serif;
     color:white!important;
@@ -74,6 +79,15 @@
     font-size:14px;
     line-height: 14px;
     font-weight: normal;
+}
+
+.bcbCountdown .timeLeft:hover:after {
+    content:'';
+    z-index: 1;   
+}
+.bcbCountdown .timeLeft:hover span:hover:after { 
+    content:attr(data-label);
+    z-index: 2;
 }
 
 .bcbCountdown.theme1::before { background-image: url("img/gregrose.gif"); }

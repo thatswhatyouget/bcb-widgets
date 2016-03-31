@@ -2,10 +2,10 @@ function bcbCountdown(element, config, theme) {
     var themes = 12;
     try {
         theme = theme == "0" ? 0 : parseInt(theme || '') || -1;
-        var event = (Array.isArray(config) ? config : config.split("\n")).map(function (line) {
+        var event = (Array.isArray(config) ? config : config.split("\n")).map(function(line) {
             var parts = line.split('~');
             return { time: new Date(parts.pop()), title: parts.shift(), subtitle: parts.join('~') };
-        }).filter(function (event) { return event.time.valueOf() > Date.now(); })[0];
+        }).filter(function(event) { return event.time.valueOf() > Date.now(); })[0];
         if (!event) return $(element).slideUp();
         var $timeLeft = $('<div>').addClass('timeLeft');
         if (theme < 0 || theme >= themes) theme = Math.floor(Math.random() * themes);
@@ -19,15 +19,24 @@ function bcbCountdown(element, config, theme) {
                 $(element).find('.title, .subtitle, .timeLeft').hide();
                 return bcbCountdown(element, config);
             }
-            $timeLeft.html("<span>" + [24, 60, 60, 1].map(function (num, base, segments) {
-                for (var d = duration, i = base; i < segments.length; i++) d /= segments[i];
-                if (base) d %= segments[base - 1];
-                return (d < 10 ? "0" : "") + Math.floor(d);
-            }).join("</span>:<span>") + "</span>");
+            var timeSpans = [{ i: 24, d: "Days" }, { i: 60, d: "Hours" }, { i: 60, d: "Minutes" }, { i: 1, d: "Seconds" }].map(function(num, base, segments) {
+                for (var d = duration, i = base; i < segments.length; i++) d /= segments[i].i;
+                if (base) d %= segments[base - 1].i;
+                return $("<span>").attr('data-label', num.d).html((d < 10 ? "0" : "") + Math.floor(d));
+            });
+            if ($timeLeft.find("span").length < timeSpans.length)
+                timeSpans.forEach(function(e, i) {
+                    if (i) $timeLeft.append(":");
+                    $timeLeft.append(e);
+                });
+            else
+                $timeLeft.find("span").each(function(i) {
+                    $(this).html($(timeSpans[i]).html());
+                });
         }
         updateTime();
         var interval = setInterval(updateTime, 1000), pressed = [], unlocked = false;
-        $(window).keydown(function (e) {
+        $(window).keydown(function(e) {
             pressed.push(String.fromCharCode(e.which).toUpperCase());
             if (pressed.length > 5) pressed.shift();
             if (pressed.join('') == "SUGAR") unlocked = true;

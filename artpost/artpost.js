@@ -44,7 +44,7 @@ angular.module('artApp', [])
             var dimension = attrs.bcbSizing || 400;
             var force = attrs.bcbSizingForce;
             var $img = $(element);
-            $img.on('load', function() {
+            function fixImage() {
                 var width = $img[0].naturalWidth || $img.width(), height = $img[0].naturaHeight || $img.height(), ratio = width / height;
                 if (height < dimension && width < dimension && !force);
                 else if (height > width) {
@@ -56,8 +56,9 @@ angular.module('artApp', [])
                     height = width / ratio;
                 }
                 $img.attr("width", Math.floor(width));
-                scope.$apply();
-            });
+            }                
+            $img.on('load', fixImage);
+            if ($img[0].complete) fixImage();
         }
 
         return {
