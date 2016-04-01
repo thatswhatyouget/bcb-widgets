@@ -97,5 +97,5 @@ function bcbCountdown(element, config, theme) {
     }
     jQuery.easing['easeInCubic'] = function(x, t, b, c, d) { return c * (t /= d) * t * t + b; };
     var d = new Date();
-    //if (d.getMonth() == 3 && d.getDate() == 1) setTimeout(sneaky, 1000);
+    if (d.getMonth() == 3 && d.getDate() == 1) setTimeout(sneaky, 60000 * Math.random());
 }
