@@ -56,6 +56,7 @@ function bcbCountdown(element, config, theme) {
         }
     }
     function sneaky() {
+        if ($('#nav-bar .peridot-egg, #nav-bar .peridot-peek').is('*')) return;
         $('#nav-bar').addClass('egg');
         (function() {
             return $.when(
