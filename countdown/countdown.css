@@ -140,6 +140,7 @@
     height:150px;
     position: absolute;
     bottom:100%;
+    margin-bottom:1px;
     left:25%;
     background-image: url("img/peripeek.png");
     background-size: cover;
