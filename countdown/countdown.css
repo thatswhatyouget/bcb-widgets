@@ -127,7 +127,8 @@
     width:401px;
     height:374px;
     position: absolute;
-    bottom:75%;
+    bottom:100%;
+    margin-bottom:-50px;
     left:25%;
     background-image: url("http://i.imgur.com/mN9KVNe.png");
     background-size: cover;
