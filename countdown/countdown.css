@@ -129,8 +129,18 @@
     position: absolute;
     bottom:75%;
     left:25%;
-    background-image: url("img/peripush.png");
+    background-image: url("https://i.imgur.com/aSHUebd.gif");
     background-size: cover;
     background-position: 0 0;
     font-size:374px;
+}
+.peridot-peek {
+    width:251px;
+    height:150px;
+    position: absolute;
+    bottom:100%;
+    left:25%;
+    background-image: url("img/peripeek.png");
+    background-size: cover;
+    background-position: 0 0;
 }

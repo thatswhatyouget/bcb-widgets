@@ -40,7 +40,7 @@ function bcbCountdown(element, config, theme) {
             pressed.push(String.fromCharCode(e.which).toUpperCase());
             if (pressed.length > 5) pressed.shift();
             if (pressed.join('') == "SUGAR") unlocked = true;
-            if (pressed.join('') == "RIDOT") peridot();
+            if (pressed.join('') == "RIDOT") sneaky();
             if (unlocked && [37, 39].indexOf(e.which) >= 0) {
                 $(element).removeClass("theme" + theme);
                 theme += e.which - 38;
@@ -55,6 +55,31 @@ function bcbCountdown(element, config, theme) {
             console.error(e);
         }
     }
+    function sneaky() {
+        (function() {
+            return $.when(
+                (function() {
+                    var d = $.Deferred();
+                    $("<img>").attr('src', 'https://i.imgur.com/aSHUebd.gif').on('load', d.resolve);
+                    return d;
+                })(),
+                (function() {
+                    var d = $.Deferred();
+                    $("<img>").attr('src', 'https://thatswhatyouget.github.io/bcb-widgets/countdown/img/peripeek.png').on('load', d.resolve);
+                    return d;
+                })());
+        })().then(function() {
+            var $peek = $("<div class='peridot-peek'>").appendTo($("#nav-bar")).hide().slideDown(1000);
+            function lookAway() {
+                if ($(window).scrollTop() > 600) {
+                    setTimeout(peridot, 0);
+                    $peek.hide().remove();
+                    $(window).unbind('scroll', lookAway);
+                }
+            }
+            $(window).bind('scroll', lookAway);
+        });
+    }
     function peridot() {
         var $peridot = $('<div class="peridot-egg">').mousemove(function() {
             $peridot.unbind('mousemove');
@@ -62,12 +87,14 @@ function bcbCountdown(element, config, theme) {
             window.requestAnimationFrame = window.requestAnimationFrame || function(c) { setTimeout(c, 1000 / 60); };
             (function animate() {
                 $peridot.css('background-position', '0 -' + Math.floor(i / 2) + "em");
-                if (i / 2 == 4) $('html, body').animate({scrollTop:$(document).height()}, $(document).height() / 10, "easeInCubic");
+                if (i / 2 == 4) $('html, body').animate({ scrollTop: $(document).height() }, $(document).height() / 10, "easeInCubic");
                 if (i++ / 2 < 20) return requestAnimationFrame(animate);
                 $peridot.fadeOut(function() { $peridot.remove(); });
-            })();                
+            })();
         });
         $("#nav-bar").append($peridot);
     }
     jQuery.easing['easeInCubic'] = function(x, t, b, c, d) { return c * (t /= d) * t * t + b; };
+    var d = new Date();
+    //if (d.getMonth() == 3 && d.getDate() == 1) setTimeout(sneaky, 1000);
 }
