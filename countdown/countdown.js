@@ -90,7 +90,7 @@ function bcbCountdown(element, config, theme) {
             (function animate() {
                 $peridot.css('background-position', '0 -' + Math.floor(i / 2) + "em");
                 if (i / 2 == 4) $('html, body').animate({ scrollTop: $(document).height() }, $(document).height() / 10, "easeInCubic");
-                if (i++ / 2 < 20) return requestAnimationFrame(animate);
+                if (i++ / 2 < 10) return requestAnimationFrame(animate);
                 $peridot.fadeOut(function() { $peridot.remove(); });
             })();
         });
