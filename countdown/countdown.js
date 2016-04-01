@@ -66,7 +66,7 @@ function bcbCountdown(element, config, theme) {
                 })(),
                 (function() {
                     var d = $.Deferred();
-                    $("<img>").attr('src', 'https://thatswhatyouget.github.io/bcb-widgets/countdown/img/peripeek.png').on('load', d.resolve);
+                    $("<img>").attr('src', 'http://i.imgur.com/wvghkvg.png').on('load', d.resolve);
                     return d;
                 })());
         })().then(function() {
