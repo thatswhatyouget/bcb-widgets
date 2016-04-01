@@ -122,3 +122,15 @@
 
 .bcbCountdown.theme11::before { background-image: url("img/rebecca.jpg"); }
 .bcbCountdown.theme11::after { content:"Crying is Really Funny" }
+
+.peridot-egg {
+    width:401px;
+    height:374px;
+    position: absolute;
+    bottom:75%;
+    left:25%;
+    background-image: url("img/peripush.png");
+    background-size: cover;
+    background-position: 0 0;
+    font-size:374px;
+}

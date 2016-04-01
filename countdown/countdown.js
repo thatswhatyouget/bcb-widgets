@@ -40,6 +40,7 @@ function bcbCountdown(element, config, theme) {
             pressed.push(String.fromCharCode(e.which).toUpperCase());
             if (pressed.length > 5) pressed.shift();
             if (pressed.join('') == "SUGAR") unlocked = true;
+            if (pressed.join('') == "RIDOT") peridot();
             if (unlocked && [37, 39].indexOf(e.which) >= 0) {
                 $(element).removeClass("theme" + theme);
                 theme += e.which - 38;
@@ -54,4 +55,19 @@ function bcbCountdown(element, config, theme) {
             console.error(e);
         }
     }
+    function peridot() {
+        var $peridot = $('<div class="peridot-egg">').mousemove(function() {
+            $peridot.unbind('mousemove');
+            var i = 2;
+            window.requestAnimationFrame = window.requestAnimationFrame || function(c) { setTimeout(c, 1000 / 60); };
+            (function animate() {
+                $peridot.css('background-position', '0 -' + Math.floor(i / 2) + "em");
+                if (i / 2 == 4) $('html, body').animate({scrollTop:$(document).height()}, $(document).height() / 10, "easeInCubic");
+                if (i++ / 2 < 20) return requestAnimationFrame(animate);
+                $peridot.fadeOut(function() { $peridot.remove(); });
+            })();                
+        });
+        $("#nav-bar").append($peridot);
+    }
+    jQuery.easing['easeInCubic'] = function(x, t, b, c, d) { return c * (t /= d) * t * t + b; };
 }
