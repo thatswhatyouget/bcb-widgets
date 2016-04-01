@@ -56,7 +56,7 @@ function bcbCountdown(element, config, theme) {
         }
     }
     function sneaky() {
-        $('#nav-bar').css('position', 'relative');
+        $('#nav-bar').addClass('egg');
         (function() {
             return $.when(
                 (function() {

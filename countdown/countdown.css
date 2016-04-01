@@ -145,3 +145,14 @@
     background-size: cover;
     background-position: 0 0;
 }
+
+#nav-bar.egg {
+    position: relative;
+}
+#nav-bar.egg.fixed {
+    position: fixed;    
+}
+
+#nav-bar.fixed .peridot-egg {
+    display:none;   
+}
