@@ -56,11 +56,12 @@ function bcbCountdown(element, config, theme) {
         }
     }
     function sneaky() {
+        $('#nav-bar').css('position', 'relative');
         (function() {
             return $.when(
                 (function() {
                     var d = $.Deferred();
-                    $("<img>").attr('src', 'https://i.imgur.com/aSHUebd.gif').on('load', d.resolve);
+                    $("<img>").attr('src', 'http://i.imgur.com/mN9KVNe.png').on('load', d.resolve);
                     return d;
                 })(),
                 (function() {
