@@ -69,6 +69,7 @@ angular.module('fanficApp', [])
                     fanficPost.description = $info.children('div').last().text().trim();
                     fanficPost.art = fanficPost.art || new Art(fanficPost.url, 'https:' + $page.find('#img_large img').attr('data-original'), fanficPost.title);
                 }
+                $scope.$apply();
             });
         }
     }).directive('bcbSizing', function() {
