@@ -47,11 +47,29 @@ angular.module('fanficApp', [])
         }
         this.AddArt = function() {
             if (!fanficPost.newArt) return;
-            scrape(fanficPost.newArt).then(function(art) {
+            artScraper(fanficPost.newArt).then(function(art) {
                 fanficPost.art = art;
                 $scope.$apply();
             });
             fanficPost.newArt = '';
+        }
+        this.AddFic = function() {
+            if (!fanficPost.url) return;
+            scrape(fanficPost.url).then(function(page) {
+                var $page = $(page.replace(/src=/g, 'crs='));
+                if (/archiveofourown\.org/i.test(fanficPost.url)) {
+                    fanficPost.title = $page.find('.title.heading').text().trim();
+                    fanficPost.author = $page.find('.byline.heading').text().trim();
+                    fanficPost.description = $page.find('.summary.module blockquote').text().trim();
+                }
+                else if (/fanfiction\.net/i.test(fanficPost.url)) {
+                    var $info = $page.find('#profile_top');
+                    fanficPost.title = $info.children('b').first().text().trim();
+                    fanficPost.author = $info.children('a').first().text().trim();
+                    fanficPost.description = $info.children('div').last().text().trim();
+                    fanficPost.art = fanficPost.art || new Art(fanficPost.url, 'https:' + $page.find('#img_large img').attr('data-original'), fanficPost.title);
+                }
+            });
         }
     }).directive('bcbSizing', function() {
         function link(scope, element, attrs) {
@@ -70,7 +88,7 @@ angular.module('fanficApp', [])
                     height = width / ratio;
                 }
                 $img.attr("width", Math.floor(width));
-            }                
+            }
             $img.on('load', fixImage);
             if ($img[0].complete) fixImage();
         }
@@ -81,8 +99,7 @@ angular.module('fanficApp', [])
     });
 
 function scrape(link) {
-    var deferred = $.Deferred();
-    $.ajax({
+    return $.ajax({
         url: "http://crossorigin.me/" + link,
         type: "GET",
         dataType: "text",
@@ -94,7 +111,12 @@ function scrape(link) {
             dataType: "text",
             timeout: 1000
         });
-    }).then(function(page) {
+    });
+}
+
+function artScraper(link) {
+    var deferred = $.Deferred();
+    scrape(link).then(function(page) {
         var doc = document.implementation.createHTMLDocument(), image = '', caption = '';
         doc.documentElement.innerHTML = page;
         [].concat.apply([], doc.getElementsByTagName("meta")).forEach(function(meta) {
