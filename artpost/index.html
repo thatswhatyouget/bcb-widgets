@@ -81,7 +81,7 @@
         <div ng-repeat="art in artPost.art track by $index">
             <div ng-if="$first">
                 <div class="separator" style="text-align: center;">
-                    <a href="{{art.image}}" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" title="{{art.caption}}">
+                    <a href="{{art.source}}" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" title="{{art.caption}}">
                         <img border="0" src="{{art.image}}" bcb-sizing="640" alt="{{art.caption}}" />
                     </a>
                 </div>
