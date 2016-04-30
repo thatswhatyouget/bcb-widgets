@@ -93,7 +93,7 @@
 }
 
 .bcbCountdown a.info {
-    display:none;
+    opacity:0;
     position: absolute;
     left:0;
     top:0;
@@ -105,10 +105,11 @@
     width:1em;
     height:1em;
     background-color:white;
+    transition:opacity .2s ease-in-out;
 }
 
 .bcbCountdown:hover a.info{
-    display:inline-block;   
+    opacity:1;
 }
 
 .bcbCountdown.theme1::before { background-image: url("img/gregrose.gif"); }
