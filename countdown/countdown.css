@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Rokkitt:700);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css);
+
 .bcbCountdown {
     box-sizing:border-box;
     width: 325px;
@@ -88,6 +90,25 @@
 .bcbCountdown .timeLeft:hover span:hover:after { 
     content:attr(data-label);
     z-index: 2;
+}
+
+.bcbCountdown a.info {
+    display:none;
+    position: absolute;
+    left:0;
+    top:0;
+    color:cornflowerblue;
+    font-size:20px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 1em;
+    width:1em;
+    height:1em;
+    background-color:white;
+}
+
+.bcbCountdown:hover a.info{
+    display:inline-block;   
 }
 
 .bcbCountdown.theme1::before { background-image: url("img/gregrose.gif"); }

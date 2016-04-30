@@ -55,6 +55,9 @@ function bcbCountdown(element, config, theme) {
             console.error(e);
         }
     }
+
+    $('<a>').addClass('info').attr('title',"Inspired by Doafhat's countdown designs").attr('href', "http://doafhat.com/post/135588250298/all-the-edited-stevenbomb-4-countdowns-for-your").attr('target', '_blank').append($('<i>').addClass('fa fa-info-circle')).appendTo(element);
+
     function sneaky() {
         if ($('#nav-bar .peridot-egg, #nav-bar .peridot-peek').is('*')) return;
         $('#nav-bar').addClass('egg');

@@ -12,14 +12,14 @@
         </p>
         <section>
             <h3>Countdown</h3>
-            <a href="http://doafhat.com/post/135588250298/all-the-edited-stevenbomb-4-countdowns-for-your" target="_blank" id="bcb-countdown">
+            <div id="bcb-countdown">
                 <script src="countdown/countdown.js"></script>
                 <link href="countdown/countdown.css" rel='stylesheet' type='text/css'/>
                 <script>
                     var dates = Array.prototype.concat.apply([],[0,1].map(function(y) { return [0,1,2,3,4,5,6,7,8,9,10,11].map(function(m) { return new Date(new Date().getUTCFullYear() + y, m).toISOString();})}));
                     bcbCountdown('#bcb-countdown',dates, "");
                 </script>
-            </a>
+            </div>
         </section>
         <div id="nav-bar" style="position:relative;margin-bottom:5000px;"></div>
     </body>
