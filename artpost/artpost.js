@@ -1,22 +1,35 @@
 function Art(source, image, caption) {
-    this.source = source;
-    this.image = image;
-    this.caption = caption;
+    var me = this;
+    me.source = source;
+    me.image = Array.isArray(image) ? image : [image];
+    me.caption = caption;
+    me.addImage = function () {
+        me.image.push('');        
+    }
+    me.removeImage = function (index) {
+        if (index) me.image.splice(index, 1);
+    }
+    me.imageLetter = function (index) {
+        if (me.image.length < 2) return '';
+        return String.fromCharCode('a'.charCodeAt(0) + index);
+    }
 }
 
 angular.module('artApp', [])
     .controller('ArtPostController', function($scope) {
         var artPost = this;
-        artPost.art = JSON.parse(localStorage.getItem("artPost.art") || '[]') || [];
+        artPost.art = (JSON.parse(localStorage.getItem("artPost.art") || '[]') || []).map(function (art) {
+            return new Art(art.source, art.image, art.caption);
+        });
         artPost.text = localStorage.getItem("artPost.text") || "Check out all of the absolutely amazing artwork on display tonight!";
         artPost.nextSource = "";
         artPost.outputHtml = function() {
             var $output = $("section.output").clone();
             $output.find('h3').remove();
             $output.contents().filter(function() { return this.nodeType == Node.COMMENT_NODE; }).remove();
-            $output.children().contents().filter(function() { return this.nodeType == Node.COMMENT_NODE; }).remove();
+            $output.find('*').contents().filter(function() { return this.nodeType == Node.COMMENT_NODE; }).remove();
             $output.children('div').first().after("<!--more-->");
-            $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if').removeAttr('bcb-sizing');
+            $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if').removeAttr('ng-init').removeAttr('ng-bind').removeAttr('bcb-sizing');
             return $output.html().trim();
         }
         artPost.Add = function() {
@@ -81,12 +94,12 @@ function scrape(link) {
             timeout: 1000
         });
     }).then(function(page) {
-        var doc = document.implementation.createHTMLDocument(), image = '', caption = '';
+        var doc = document.implementation.createHTMLDocument(), image = [], caption = '';
         doc.documentElement.innerHTML = page;
         [].concat.apply([], doc.getElementsByTagName("meta")).forEach(function(meta) {
             switch (meta.getAttribute("property")) {
                 case "og:image":
-                    return image = meta.getAttribute("content");
+                    return image.push(meta.getAttribute("content"));
                 case "og:description":
                     return caption = $('<div>').html(meta.getAttribute("content")).text();
             }

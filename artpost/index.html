@@ -57,14 +57,19 @@
             <label>Text:</label>
             <input type="text" ng-model="artPost.text" />
         </div>
-        <div ng-repeat="art in artPost.art track by $index">
-            <label>Source {{$index + 1}}:</label>
+        <div ng-repeat="art in artPost.art track by $index" ng-init="sourceNum = $index">
+            <label>Source {{sourceNum + 1}}:</label>
             <input type="url" ng-model="art.source" />
-            <button ng-click="artPost.Remove($index)">Delete</button>
+            <button ng-click="artPost.Remove(sourceNum)">Delete</button>
             <br/>
-            <label>Image {{$index + 1}}:</label>
-            <input type="url" ng-model="art.image" /><br/>
-            <label>Alt Text {{$index + 1}}:</label>
+            <span ng-repeat="image in art.image track by $index" ng-init="imageNum = $index">
+                <label ng-bind="'Image ' + (sourceNum + 1) + art.imageLetter(imageNum) + ':'"></label>
+                <input type="url" ng-model="art.image[imageNum]" />
+                <button ng-if="$first" ng-click="art.addImage()">Add</button>
+                <button ng-if="!$first" ng-click="art.removeImage(imageNum)">Remove</button>
+                <br/>
+            </span>
+            <label>Alt Text {{sourceNum + 1}}:</label>
             <input type="text" ng-model="art.caption" />
         </div>
         <div>
@@ -78,27 +83,27 @@
     </section>
     <section class="output">
         <h3>Preview</h3>
-        <div ng-repeat="art in artPost.art track by $index">
+        <div ng-repeat="art in artPost.art track by $index" ng-init="sourceNum = $index">
             <div ng-if="$first">
-                <div class="separator" style="text-align: center;">
+                <div class="separator" style="text-align: center;" ng-repeat="img in art.image track by $index">
                     <a href="{{art.source}}" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" title="{{art.caption}}">
-                        <img border="0" src="{{art.image}}" bcb-sizing="640" alt="{{art.caption}}" />
+                        <img border="0" src="{{img}}" bcb-sizing="640" alt="{{art.caption}}" />
                     </a>
                 </div>
                 <br /> {{artPost.text}}
                 <br />
                 <br />
-                <b><a href="{{art.source}}">Source {{$index + 1}}</a></b>
+                <b><a href="{{art.source}}">Source {{sourceNum + 1}}</a></b>
                 <br />
                 <br />
             </div>
             <div ng-if="!$first">
                 <hr />
-                <b><a href="{{art.source}}">Source {{$index + 1}}</a></b>
+                <b><a href="{{art.source}}">Source {{sourceNum + 1}}</a></b>
                 <br />
-                <div class="separator" style="text-align: center;">
+                <div class="separator" style="text-align: center;" ng-repeat="img in art.image track by $index">
                     <a href="{{art.source}}" imageanchor="1" style="margin-left: 1em; margin-right: 1em;" title="{{art.caption}}">
-                        <img border="0" src="{{art.image}}" bcb-sizing="640" alt="{{art.caption}}" />
+                        <img border="0" src="{{img}}" bcb-sizing="640" alt="{{art.caption}}" />
                     </a>
                 </div>
                 <br />
@@ -107,7 +112,7 @@
     </section>
     <section class="html">
         <h3>HTML</h3>
-        <textarea id="html">{{artPost.outputHtml()}}</textarea><br/>
+        <textarea id="html" ng-bind="artPost.outputHtml()"></textarea><br/>
         <button class="clipboard" data-clipboard-target="#html">Copy to Clipboard</button>
     </section>
     
