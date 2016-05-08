@@ -24,8 +24,16 @@ Art.findAt = function (link) {
         dataType: "json",
         timeout: 1000
     }).then(function (data) {
-        if (data.openGraph.type == "tumblr-feed:photoset") throw new Error("Photosets must be scraped manually to get all images");
-        deferred.resolve(new Art(link, data.openGraph.image, data.openGraph.title || data.openGraph.description));
+        try {
+            if (data.openGraph.type == "tumblr-feed:photoset") throw new Error("Photosets must be scraped manually to get all images");
+            if (data.openGraph.site_name == "Twitter") throw new Error("Twitter might contain a photoset.");
+            deferred.resolve(new Art(link, data.openGraph.image, data.openGraph.title || data.openGraph.description));
+        }
+        catch (e) {
+            var fail = $.Deferred();
+            fail.reject(e);
+            return fail;
+        }
     }).fail(function () {
         //manually try to scrape open graph tags
         $.ajax({
