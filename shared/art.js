@@ -29,6 +29,11 @@ Art.findAt = function (link) {
             if (data.openGraph.error) throw new Error(data.openGraph.error);
             if (data.openGraph.type == "tumblr-feed:photoset") throw new Error("Photosets must be scraped manually to get all images");
             if (data.openGraph.site_name == "Twitter") throw new Error("Twitter might contain a photoset.");
+            if (data.openGraph.site_name == "Imgur") {
+                //replace thumbnail image with correct image(s) detected on page
+                var validImage = /i\.imgur\.com/;
+                data.openGraph.image = data.htmlInferred.images.filter(function (i) { return validImage.test(i) });
+            }
             deferred.resolve(new Art(link, data.openGraph.image, data.openGraph.title || data.openGraph.description));
         }
         catch (e) {
