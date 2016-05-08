@@ -1,9 +1,3 @@
-function Art(source, image, caption) {
-    this.source = source;
-    this.image = image;
-    this.caption = caption;
-}
-
 function Category(name, color, selected) {
     this.name = name;
     this.color = color;
@@ -47,7 +41,7 @@ angular.module('fanficApp', [])
         }
         this.AddArt = function() {
             if (!fanficPost.newArt) return;
-            artScraper(fanficPost.newArt).then(function(art) {
+            Art.findAt(fanficPost.newArt).then(function(art) {
                 fanficPost.art = art;
                 $scope.$apply();
             });
@@ -72,6 +66,16 @@ angular.module('fanficApp', [])
                 $scope.$apply();
             });
         }
+        DropLink(function (link) {
+            if (/archiveofourown\.org/i.test(link) || /fanfiction\.net/i.test(link)) {
+                fanficPost.url = link;
+                fanficPost.AddFic();
+            }
+            else {
+                fanficPost.newArt = link;
+                fanficPost.AddArt();
+            }
+        });
     }).directive('bcbSizing', function() {
         function link(scope, element, attrs) {
             var dimension = attrs.bcbSizing || 400;
@@ -113,25 +117,4 @@ function scrape(link) {
             timeout: 1000
         });
     });
-}
-
-function artScraper(link) {
-    var deferred = $.Deferred();
-    scrape(link).then(function(page) {
-        var doc = document.implementation.createHTMLDocument(), image = '', caption = '';
-        doc.documentElement.innerHTML = page;
-        [].concat.apply([], doc.getElementsByTagName("meta")).forEach(function(meta) {
-            switch (meta.getAttribute("property")) {
-                case "og:image":
-                    return image = meta.getAttribute("content");
-                case "og:description":
-                    return caption = $('<div>').html(meta.getAttribute("content")).text();
-            }
-        });
-        deferred.resolve(new Art(link, image, caption));
-    }, function() {
-        deferred.resolve(new Art(link));
-    });
-    setTimeout(function() { deferred.resolve(new Art(link)) }, 2000);
-    return deferred.promise();
 }

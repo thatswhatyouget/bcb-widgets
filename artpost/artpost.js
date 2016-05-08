@@ -36,6 +36,10 @@ angular.module('artApp', [])
             localStorage.setItem("artPost.art", JSON.stringify(artPost.art));
             localStorage.setItem("artPost.text", artPost.text);
         }
+        DropLink(function (link) {
+            artPost.nextSource = link;
+            artPost.Add();
+        });
     }).directive('bcbSizing', function () {
         function link(scope, element, attrs) {
             var dimension = attrs.bcbSizing || 400;
