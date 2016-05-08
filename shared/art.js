@@ -13,6 +13,7 @@ function Art(source, image, caption) {
         if (me.image.length < 2) return '';
         return String.fromCharCode('a'.charCodeAt(0) + index);
     }
+    if (!me.image.length) me.addImage();
 }
 
 Art.findAt = function (link) {
@@ -25,6 +26,7 @@ Art.findAt = function (link) {
         timeout: 1000
     }).then(function (data) {
         try {
+            if (data.openGraph.error) throw new Error(data.openGraph.error);
             if (data.openGraph.type == "tumblr-feed:photoset") throw new Error("Photosets must be scraped manually to get all images");
             if (data.openGraph.site_name == "Twitter") throw new Error("Twitter might contain a photoset.");
             deferred.resolve(new Art(link, data.openGraph.image, data.openGraph.title || data.openGraph.description));
