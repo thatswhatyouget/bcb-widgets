@@ -1,0 +1,68 @@
+<html ng-app="videoApp">
+
+<head>
+    <title>Beach City Bugle Video Post Builder</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
+    <script src="../shared/art.js"></script>
+    <script src="../shared/droplink.js"></script>
+    <script src="videopost.js"></script>
+    <link rel="stylesheet" href="../shared/builder.css" type="text/css" />
+</head>
+
+<body ng-controller="VideoPostController as videoPost">
+    <section class="construct">
+        <h3>Build</h3>
+        <div>
+            <label>Youtube Url:</label>
+            <input type="url" ng-model="videoPost.url" />
+            <br/>
+            <label>Text:</label>
+            <input type="text" ng-model="videoPost.text" />
+            <br/>
+            <label>Thumbnail Quality:</label>
+            <ul>
+                <li>
+                    <input type="radio" ng-model="videoPost.thumbnailQuality" id="sd" value="sd" style="width:auto;">
+                    <label for="sd" style="width:auto;">SD</label>
+                </li>
+                <li>
+                    <input type="radio" ng-model="videoPost.thumbnailQuality" id="maxres" value="maxres" style="width:auto;">
+                    <label for="maxres" style="width:auto;">HD</label>
+                </li>
+            </ul>
+            <br/>
+        </div>
+    </section>
+    <section class="output">
+        <h3>Preview</h3>
+        <div class="separator" style="text-align: center;" ng-if="videoPost.url">
+            <a href="{{videoPost.url}}" imageanchor="1" style="margin-left: 0; margin-right: 0;"><img border="0" src="{{videoPost.getThumbnailUrl()}}{{videoPost.thumbnailQuality}}default.jpg" width="640" /></a>
+            <br /><br />
+        </div>
+        <div ng-if="videoPost.text">
+            <div class="separator" ng-bind="videoPost.text"></div>
+            <br />
+        </div>
+        <div style="text-align: center;" ng-if="videoPost.url">
+            <hr />
+            <br />
+            <div class="separator">
+                <iframe allowfullscreen="" frameborder="0" height="{{videoPost.videoHeight()}}" src="{{videoPost.getEmbedUrl()}}" width="640"></iframe>
+            </div>
+        </div>
+    </section>
+    <section class="html">
+        <h3>HTML</h3>
+        <textarea id="html">{{videoPost.outputHtml()}}</textarea>
+        <br/>
+        <button class="clipboard" data-clipboard-target="#html">Copy to Clipboard</button>
+    </section>
+
+    <script>
+        new Clipboard('.clipboard');
+    </script>
+</body>
+
+</html>

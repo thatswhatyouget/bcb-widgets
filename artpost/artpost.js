@@ -40,29 +40,4 @@ angular.module('artApp', [])
             artPost.nextSource = link;
             artPost.Add();
         });
-    }).directive('bcbSizing', function () {
-        function link(scope, element, attrs) {
-            var dimension = attrs.bcbSizing || 400;
-            var force = attrs.bcbSizingForce;
-            var $img = $(element);
-            function fixImage() {
-                var width = $img[0].naturalWidth || $img.width(), height = $img[0].naturaHeight || $img.height(), ratio = width / height;
-                if (height < dimension && width < dimension && !force);
-                else if (height > width) {
-                    height = dimension;
-                    width = height * ratio;
-                }
-                else {
-                    width = dimension;
-                    height = width / ratio;
-                }
-                $img.attr("width", Math.floor(width));
-            }
-            $img.on('load', fixImage);
-            if ($img[0].complete) fixImage();
-        }
-
-        return {
-            link: link
-        };
-    });
+    }).directive('bcbSizing', Art.bcbSizing);

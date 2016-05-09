@@ -2,13 +2,13 @@ function Category(name, color, selected) {
     this.name = name;
     this.color = color;
     this.selected = selected || false;
-    this.cleanName = function() {
+    this.cleanName = function () {
         return this.name.replace(/[^A-Z0-9]/ig, '');
     }
 }
 
 angular.module('fanficApp', [])
-    .controller('FanficPostController', function($scope) {
+    .controller('FanficPostController', function ($scope) {
         var fanficPost = this;
         fanficPost.art = null;
         fanficPost.categories = [
@@ -21,9 +21,9 @@ angular.module('fanficApp', [])
             new Category("Shipping", "orange"),
             new Category("Slice of Life", "#6aa84f")
         ];
-        fanficPost.selectedCategories = function() { return fanficPost.categories.filter(function(c) { return c.selected; }).length; };
+        fanficPost.selectedCategories = function () { return fanficPost.categories.filter(function (c) { return c.selected; }).length; };
         fanficPost.description = '';
-        fanficPost.getDescription = function() {
+        fanficPost.getDescription = function () {
             return fanficPost.description.replace('\n', '<br/>');
         }
         fanficPost.author = '';
@@ -31,25 +31,25 @@ angular.module('fanficApp', [])
         fanficPost.url = '';
         fanficPost.additionalTags = '';
         fanficPost.newArt = '';
-        this.outputHtml = function() {
+        this.outputHtml = function () {
             var $output = $("section.output").clone();
             $output.find('h3').remove();
-            $output.contents().filter(function() { return this.nodeType == Node.COMMENT_NODE; }).remove();
-            $output.children().contents().filter(function() { return this.nodeType == Node.COMMENT_NODE; }).remove();
+            $output.contents().filter(function () { return this.nodeType == Node.COMMENT_NODE; }).remove();
+            $output.children().contents().filter(function () { return this.nodeType == Node.COMMENT_NODE; }).remove();
             $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if').removeAttr('bcb-sizing');
             return $output.html().trim();
         }
-        this.AddArt = function() {
+        this.AddArt = function () {
             if (!fanficPost.newArt) return;
-            Art.findAt(fanficPost.newArt).then(function(art) {
+            Art.findAt(fanficPost.newArt).then(function (art) {
                 fanficPost.art = art;
                 $scope.$apply();
             });
             fanficPost.newArt = '';
         }
-        this.AddFic = function() {
+        this.AddFic = function () {
             if (!fanficPost.url) return;
-            scrape(fanficPost.url).then(function(page) {
+            scrape(fanficPost.url).then(function (page) {
                 var $page = $(page.replace(/src=/g, 'crs='));
                 if (/archiveofourown\.org/i.test(fanficPost.url)) {
                     fanficPost.title = $page.find('.title.heading').text().trim();
@@ -76,32 +76,7 @@ angular.module('fanficApp', [])
                 fanficPost.AddArt();
             }
         });
-    }).directive('bcbSizing', function() {
-        function link(scope, element, attrs) {
-            var dimension = attrs.bcbSizing || 400;
-            var force = attrs.bcbSizingForce;
-            var $img = $(element);
-            function fixImage() {
-                var width = $img[0].naturalWidth || $img.width(), height = $img[0].naturaHeight || $img.height(), ratio = width / height;
-                if (height < dimension && width < dimension && !force);
-                else if (height > width) {
-                    height = dimension;
-                    width = height * ratio;
-                }
-                else {
-                    width = dimension;
-                    height = width / ratio;
-                }
-                $img.attr("width", Math.floor(width));
-            }
-            $img.on('load', fixImage);
-            if ($img[0].complete) fixImage();
-        }
-
-        return {
-            link: link
-        };
-    });
+    }).directive('bcbSizing', Art.bcbSizing);
 
 function scrape(link) {
     return $.ajax({
@@ -109,7 +84,7 @@ function scrape(link) {
         type: "GET",
         dataType: "text",
         timeout: 1000
-    }).then(function(r) { return r; }, function(e) {
+    }).then(function (r) { return r; }, function (e) {
         return $.ajax({
             url: "http://cors.io/?u=" + link,
             type: "GET",
