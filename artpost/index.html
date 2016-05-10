@@ -32,6 +32,7 @@
             </span>
             <label>Alt Text {{sourceNum + 1}}:</label>
             <input type="text" ng-model="art.caption" />
+            <button ng-click="artPost.Rescan(sourceNum)">Rescan</button>
         </div>
         <div>
             <label>Source {{artPost.art.length + 1}}:</label>

@@ -16,6 +16,16 @@ angular.module('artApp', [])
             $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if').removeAttr('ng-init').removeAttr('ng-bind').removeAttr('bcb-sizing');
             return $output.html().trim();
         }
+        artPost.Rescan = function (i) {
+            if (!artPost.art[i]) return;
+            console.log("BANG!");
+            Art.findAt(artPost.art[i].source).then(function (art) {
+                artPost.art[i] = art;
+                console.log("DONG!");
+                $scope.$apply();
+                Save();
+            });
+        }
         artPost.Add = function () {
             if (!artPost.nextSource) return;
             Art.findAt(artPost.nextSource).then(function (art) {
