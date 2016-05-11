@@ -23,6 +23,7 @@
 .bcbCountdown .title, .bcbCountdown .subtitle {
      height:.75em;
     line-height: .75em;   
+    text-align: center;
 }
 
 .bcbCountdown .title {
@@ -36,9 +37,11 @@
 
 .bcbCountdown .timeLeft {
     font-size:35px;
+    line-height:40px;
     font-family: Arial, Helvetica, sans-serif; 
     font-weight: 600;
     margin-top:-3px;
+    text-align: center;
 }
 .bcbCountdown .timeLeft span, .bcbCountdown .timeLeft:hover span:hover {
     width:1.2em;
@@ -81,6 +84,7 @@
     font-size:14px;
     line-height: 14px;
     font-weight: normal;
+    text-align: center;
 }
 
 .bcbCountdown .timeLeft:hover:after {
