@@ -21,7 +21,7 @@ angular.module('videoApp', [])
             $output.find('h3').remove();
             $output.contents().filter(function () { return this.nodeType == Node.COMMENT_NODE; }).remove();
             $output.children().contents().filter(function () { return this.nodeType == Node.COMMENT_NODE; }).remove();
-            $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if').removeAttr('bcb-sizing');
+            $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if').removeAttr('bcb-sizing').removeAttr('ng-bind');
             $output.find('hr').first().before("<!--more-->");
             return $output.html().trim();
         }

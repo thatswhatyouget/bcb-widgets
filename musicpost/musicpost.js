@@ -17,7 +17,7 @@ function Song(url, $scope, $sce) {
             $.get('https://soundcloud.com/oembed?format=json&url=' + encodeURI(me.url)).then(function (data) {
                 me.embedHtml = $sce.trustAsHtml(data.html);
                 me.title = data.title;
-                $scope.apply();
+                $scope.$apply();
             });
         }
     }
@@ -37,7 +37,7 @@ angular.module('musicApp', [])
             $output.find('h3').remove();
             $output.contents().filter(function () { return this.nodeType == Node.COMMENT_NODE; }).remove();
             $output.children().contents().filter(function () { return this.nodeType == Node.COMMENT_NODE; }).remove();
-            $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if').removeAttr('bcb-sizing').removeAttr('ng-bind-html');
+            $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if').removeAttr('bcb-sizing').removeAttr('ng-bind-html').removeAttr('ng-bind');
             $output.find('hr').first().before("<!--more-->");
             return $output.html().trim();
         }
@@ -60,11 +60,10 @@ angular.module('musicApp', [])
         DropLink(function (link) {
             if (/soundcloud\.com/i.test(link) || ytReg.test(link)) {
                 musicPost.url = link;
-                musicPost.AddSong();
             }
             else {
                 musicPost.newArt = link;
-                musicPost.AddArt();
             }
+            $scope.$apply();
         });
     }]).directive('bcbSizing', Art.bcbSizing);
