@@ -22,7 +22,7 @@ angular.module('videoApp', [])
             $output.contents().filter(function () { return this.nodeType == Node.COMMENT_NODE; }).remove();
             $output.children().contents().filter(function () { return this.nodeType == Node.COMMENT_NODE; }).remove();
             $output.find('*').removeAttr('class').removeAttr('ng-repeat').removeAttr('ng-if').removeAttr('bcb-sizing');
-            $output.children('hr').before("<!--more-->");
+            $output.find('hr').first().before("<!--more-->");
             return $output.html().trim();
         }
         DropLink(function (link) {

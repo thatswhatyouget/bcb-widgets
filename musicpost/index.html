@@ -1,0 +1,117 @@
+<html ng-app="musicApp">
+
+<head>
+    <title>Beach City Bugle Music Post Builder</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
+    <script src="../shared/art.js"></script>
+    <script src="../shared/droplink.js"></script>
+    <script src="musicpost.js"></script>
+    <link rel="stylesheet" href="../shared/builder.css" type="text/css" />
+</head>
+
+<body ng-controller="MusicPostController as musicPost">
+    <section class="construct">
+        <h3>Build</h3>
+        <div>
+            <label>New Image Source:</label>
+            <input type="url" ng-model="musicPost.newArt" />
+            <button ng-click="musicPost.AddArt()">Scan</button>
+            <br/>
+        </div>
+        <div ng-if="musicPost.art">
+            <label>Image Source:</label>
+            <input type="url" ng-model="musicPost.art.source" />
+            <br/>
+            <label>Image Link:</label>
+            <input type="url" ng-model="musicPost.art.image[0]" />
+            <br/>
+            <label>Alt Text:</label>
+            <input type="text" ng-model="musicPost.art.caption" />
+        </div>
+        <div>
+            <label>Text:</label>
+            <input type="text" ng-model="musicPost.text" />
+        </div>
+        <div>
+            <label>New Song Url:</label>
+            <input type="url" ng-model="musicPost.url" />
+            <button ng-click="musicPost.AddSong()">Add</button>
+            <br/>
+        </div>
+        <div ng-repeat="song in musicPost.songs track by $index">
+            <label>Url:</label>
+            <input type="url" ng-model="song.url" />
+            <button ng-click="musicPost.RemoveSong($index)">Delete</button>
+            <br/>
+            <label>Title:</label>
+            <input type="text" ng-model="song.title" />
+            <br/>
+            <label>Category:</label>
+            <ul>
+                <li>
+                    <input type="radio" ng-model="song.type" value="Instrumental" style="width:auto;">
+                    <label for="instrumental" style="width:auto;">Instrumental</label>
+                </li>
+                <li>
+                    <input type="radio" ng-model="song.type" value="Remix" style="width:auto;">
+                    <label for="remix" style="width:auto;">Remix</label>
+                </li>
+                <li>
+                    <input type="radio" ng-model="song.type" value="Vocal" style="width:auto;">
+                    <label for="vocal" style="width:auto;">Vocal</label>
+                </li>
+                <li>
+                    <input type="radio" ng-model="song.type" value="Background" style="width:auto;">
+                    <label for="background" style="width:auto;">Background</label>
+                </li>
+                <li>
+                    <input type="radio" ng-model="song.type" value="Show" style="width:auto;">
+                    <label for="show" style="width:auto;">Show</label>
+                </li>
+                <li>
+                    <input type="radio" ng-model="song.type" value="Other" style="width:auto;">
+                    <input type="text" ng-model="song.freeType" placeholder="Other" style="width:5em;" />
+                </li>
+            </ul>
+            <br/>
+        </div>
+    </section>
+    <section class="output">
+        <h3>Music: <span ng-repeat="song in musicPost.songs track by $index"><span ng-if="!$first"> / </span>{{song.title}} ({{song.getCat()}})</span></h3>
+        <div class="separator" style="text-align: center;" ng-if="musicPost.art && musicPost.art.image">
+            <a href="{{musicPost.art.source}}" target="_blank">
+                <img alt="{{musicPost.art.caption}}" border="0" src="{{musicPost.art.image[0]}}" title="{{musicPost.art.caption}}" bcb-sizing="400"
+                />
+            </a>
+        </div>
+        <div ng-if="musicPost.text">
+            <div class="separator" ng-bind="musicPost.text"></div>
+            <br />
+        </div>
+        <div style="text-align: start;" ng-repeat="song in musicPost.songs track by $index">
+            <b>{{$index + 1}}.) {{song.title}}</b>&nbsp;<b style="color:red;">({{song.getCat()}})</b>
+        </div>
+        <div style="text-align: center;" ng-if="musicPost.songs.length">
+            <hr />
+            <br />
+            <div class="separator" ng-repeat="song in musicPost.songs track by $index">
+                <div ng-bind-html="song.embedHtml" style="width:640px;margin:auto;"></div>
+                <br />
+            </div>
+        </div>
+    </section>
+    <section class="html">
+        <h3>HTML</h3>
+        <textarea id="html">{{musicPost.outputHtml()}}</textarea>
+        <br/>
+        <button class="clipboard" data-clipboard-target="#html">Copy to Clipboard</button>
+    </section>
+
+    <script>
+        new Clipboard('.clipboard');
+    </script>
+</body>
+
+</html>
