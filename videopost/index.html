@@ -37,7 +37,7 @@
     <section class="output">
         <h3>Preview</h3>
         <div class="separator" style="text-align: center;" ng-if="videoPost.url">
-            <a href="{{videoPost.url}}" imageanchor="1" style="margin-left: 0; margin-right: 0;"><img border="0" src="{{videoPost.getThumbnailUrl()}}{{videoPost.thumbnailQuality}}default.jpg" width="640" /></a>
+            <a href="{{videoPost.getLinkUrl()}}" imageanchor="1" style="margin-left: 0; margin-right: 0;"><img border="0" src="{{videoPost.getThumbnailUrl()}}{{videoPost.thumbnailQuality}}default.jpg" width="640" /></a>
             <br /><br />
         </div>
         <div ng-if="videoPost.text">
