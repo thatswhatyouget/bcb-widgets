@@ -18,10 +18,8 @@ angular.module('artApp', [])
         }
         artPost.Rescan = function (i) {
             if (!artPost.art[i]) return;
-            console.log("BANG!");
             Art.findAt(artPost.art[i].source).then(function (art) {
                 artPost.art[i] = art;
-                console.log("DONG!");
                 $scope.$apply();
                 Save();
             });

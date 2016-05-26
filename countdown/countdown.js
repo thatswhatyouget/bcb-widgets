@@ -58,8 +58,11 @@ function bcbCountdown(element, config, theme) {
 
     $('<a>').addClass('info').attr('title',"Inspired by Doafhat's countdown designs").attr('href', "http://doafhat.com/post/135588250298/all-the-edited-stevenbomb-4-countdowns-for-your").attr('target', '_blank').append($('<i>').addClass('fa fa-info-circle')).appendTo(element);
 
+    var peridinkles = 0;    
     function sneaky() {
         if ($('#nav-bar .peridot-egg, #nav-bar .peridot-peek').is('*')) return;
+        if (++peridinkles < 3) return;
+        peridinkles = 0;
         $('#nav-bar').addClass('egg');
         (function() {
             return $.when(
