@@ -86,7 +86,7 @@ function HitTheDiamond(selector) {
             gems.forEach(function (gem) {
                 var $pod = $gems
                 setTimeout(function () {
-                    $pod.append($("<div class='gem'>").addClass(gem.toString()).click(function () {
+                    $pod.append($("<div class='gem'>").addClass(gem.toString()).mousedown(function () {
                         if ($(this).is(".hit")) return;
                         $(this).removeClass('popped').addClass('.hit');
                         addScore(gem.score);
