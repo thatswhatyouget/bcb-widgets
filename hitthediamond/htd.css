@@ -6,11 +6,18 @@
     margin:auto;
     background-image:url("img/barnview.jpg");
     background-size:cover;
-    cursor: wait;
+    cursor: crosshair;
+    cursor: url("img/hammerdot.png") 10 110, crosshair;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
 }
+
+    .bcb-hit-the-diamond.mouseDown {
+        cursor:cell;
+        cursor: url("img/hammerdown.png") 22 72, cell;
+    }
+    
     .bcb-hit-the-diamond:before {
         content:'';
         position: absolute;

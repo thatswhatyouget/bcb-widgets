@@ -16,14 +16,14 @@ function HitTheDiamond(selector) {
     addScore(0);
 
     $game.mousedown(function () {
-        $game.css('cursor', 'cell');
+        $game.addClass('mouseDown');
     }).mouseup(function () {
-        $game.css('cursor', 'crosshair');
+        $game.removeClass('mouseDown');
     }).mouseleave(function () {
         $game.mouseup();
     }).contextmenu(function (e) {
         e.preventDefault();
-    }).mouseup();
+    });
 
     function Gem(name, score, img, hitImg) {
         img = img || score;
