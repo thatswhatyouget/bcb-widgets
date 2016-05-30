@@ -6,17 +6,19 @@
     margin:auto;
     background-image:url("img/barnview.jpg");
     background-size:cover;
-    cursor: crosshair;
-    cursor: url("img/hammerdot.png") 10 110, crosshair;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
 }
 
-    .bcb-hit-the-diamond.mouseDown {
-        cursor:cell;
-        cursor: url("img/hammerdown.png") 22 72, cell;
+    .bcb-hit-the-diamond.running {
+        cursor: crosshair;
+        cursor: url("img/hammerdot.png") 10 110, crosshair;   
     }
+        .bcb-hit-the-diamond.running.mouseDown {
+            cursor:cell;
+            cursor: url("img/hammerdown.png") 22 72, cell;
+        }
     
     .bcb-hit-the-diamond:before {
         content:'';
@@ -82,7 +84,6 @@
         border-radius:1em;
         box-shadow: 0 3px 0 #9ae5f4;
         background-color:#6a85a4;
-        
         color:white;
         
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -102,7 +103,7 @@
             font-size: 1.25em;
             text-transform: uppercase;
             border-radius: 1em;
-            cursor: inherit;
+            cursor: pointer;
         }
         
             .bcb-hit-the-diamond .dialog > button + button {
@@ -195,6 +196,10 @@
             }
                 .bcb-hit-the-diamond .eyepod .gems > .gem.popped {
                      margin-bottom: 0;
+                }
+                
+                .bcb-hit-the-diamond .eyepod .gems > .gem.hit {
+                    transition: all 1s ease-in-out;   
                 }
                 
                 .bcb-hit-the-diamond .eyepod .gems > .gem > img {
