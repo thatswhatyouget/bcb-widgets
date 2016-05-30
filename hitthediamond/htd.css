@@ -1,3 +1,5 @@
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css);
+
 .bcb-hit-the-diamond {
     width:640px;
     height:480px;
@@ -48,27 +50,42 @@
     
     .bcb-hit-the-diamond.running:after {
         content:"Score: " attr(data-score);
+        left:10%;
+        width:auto;
     }
     
     .bcb-hit-the-diamond.over:after {
-        content:"Game Over";
-        font-size:2em;
+        content:"";
     }
     
-    .bcb-hit-the-diamond .credits, .bcb-hit-the-diamond .instructions {
-        list-style: none;   
+    .bcb-hit-the-diamond.over:before{
+        background-image:url("img/gameover.png");
     }
+        
+    .bcb-hit-the-diamond .stars {
+        font-family: FontAwesome;
+        position: absolute;
+        top:20%;
+        right:-100%;
+        text-shadow:1px 1px #e05f46, 1px -1px #e05f46, -1px -1px #e05f46, -1px 1px #e05f46;
+        color:#fdda5c;
+        font-size: 20px;
+        white-space: nowrap;
+        transition: right .5s ease-in-out;
+    }
+        .bcb-hit-the-diamond.running .stars {
+            right:10%; 
+        }
     
-        .bcb-hit-the-diamond .credits > li > span:first-child {
-            display: inline-block;
-            min-width:40%;
-            text-align: right;
+        .bcb-hit-the-diamond .stars > span:after {
+            margin:0 .1em;
+            content:"\f005"
         }
         
-            .bcb-hit-the-diamond .credits > li > span:first-child:after {
-                margin-right:1em;
-                content:':';
-            }
+        .bcb-hit-the-diamond .stars > span.used:after {
+            content:"\f006";
+            opacity: .2;
+        }
     
     .bcb-hit-the-diamond a {
         color:#9ae5f4!important;   
@@ -129,7 +146,49 @@
                     position: relative;
                     left:-.25em;   
                 }
-
+                
+    .bcb-hit-the-diamond .credits, .bcb-hit-the-diamond .instructions {
+        list-style: none;   
+    }
+    
+        .bcb-hit-the-diamond .credits > li > span:first-child {
+            display: inline-block;
+            min-width:40%;
+            text-align: right;
+        }
+        
+            .bcb-hit-the-diamond .credits > li > span:first-child:after {
+                margin-right:1em;
+                content:':';
+            }
+        
+        .bcb-hit-the-diamond .instructions {
+            margin:0;
+            margin-top:5px;
+            padding:0;
+            text-align: center;
+        }
+            
+            .bcb-hit-the-diamond .instructions > li {
+                display: inline-block;
+                text-align: center;
+                margin:5px;
+                font-size:.8em;
+            }
+                
+                .bcb-hit-the-diamond .instructions > li > .icon {
+                    width:64px;
+                    height:64px;
+                    margin:0 auto;
+                    background-position: center top;
+                    background-size:cover;
+                    background-repeat: no-repeat;   
+                }
+                
+                    .bcb-hit-the-diamond .instructions > li > .icon.YellowDiamond {
+                        background-position-y: 35%;
+                    }
+        
     .bcb-hit-the-diamond .eyepod {
         width:629px;
         height:389px;
@@ -180,7 +239,7 @@
             left:235px;
             width:160px;
             bottom:150px;
-            transform:rotateZ(5deg); 
+            transform:rotateZ(5deg);
         }
         
         .bcb-hit-the-diamond .eyepod:nth-of-type(2n) .gems {
