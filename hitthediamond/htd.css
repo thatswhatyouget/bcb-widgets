@@ -185,7 +185,7 @@
                     background-repeat: no-repeat;   
                 }
                 
-                    .bcb-hit-the-diamond .instructions > li > .icon.YellowDiamond {
+                    .bcb-hit-the-diamond .instructions > li > .icon.YellowDiamond, .bcb-hit-the-diamond .instructions > li > .icon.YellowPearl.hitImg {
                         background-position-y: 35%;
                     }
         

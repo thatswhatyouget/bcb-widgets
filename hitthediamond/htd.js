@@ -39,14 +39,15 @@ function HitTheDiamond(selector) {
         this.hits = 0;
     }
     var gems = [
-        new Gem('Yellow Diamond', 7, "hitthediamond/img/gems/yellow-diamond.png", "hitthediamond/img/gems/yellow-diamond-hit.png"),
-        new Gem('Jasper', 5, "hitthediamond/img/gems/jasper.png", "hitthediamond/img/gems/jasper-hit.png"),
+        new Gem('Yellow Diamond', 11, "hitthediamond/img/gems/yellow-diamond.png", "hitthediamond/img/gems/yellow-diamond-hit.png"),
+        new Gem('Jasper', 7, "hitthediamond/img/gems/jasper.png", "hitthediamond/img/gems/jasper-hit.png"),
+        new Gem('Yellow Pearl', 5, "hitthediamond/img/gems/yellow-pearl.png", "hitthediamond/img/gems/yellow-pearl-hit.png"),
         new Gem('Mad-Eye Ruby', 3, "hitthediamond/img/gems/mad-eye.png", "hitthediamond/img/gems/mad-eye-hit.png"),
         new Gem('Garnet', 0, "hitthediamond/img/gems/garnet.png", "hitthediamond/img/gems/garnet.png"),
         new Gem('Pearl', 0, "hitthediamond/img/gems/pearl.png", "hitthediamond/img/gems/pearl-hit.png"),
         new Gem('Amethyst', 0, "hitthediamond/img/gems/amethyst.png", "hitthediamond/img/gems/amethyst-hit.png"),
         new Gem('Peridot', 0, "hitthediamond/img/gems/peridot.png", "hitthediamond/img/gems/peridot-hit.png"),
-        new Gem('Lapis Lazuli', 0, "hitthediamond/img/gems/lapis.png", "hitthediamond/img/gems/lapis-hit.png")
+        new Gem('Lapis Lazuli', 0, "hitthediamond/img/gems/lapis.png", "hitthediamond/img/gems/lapis-hit.png"),
     ];
 
     function Dialog(text, yesText, noText, waitForPromise) {
@@ -157,12 +158,13 @@ function HitTheDiamond(selector) {
 
     var introtext = "The Roaming Eyes have landed! Nobody knows what lurks inside, but the Crystal Gems have gone in to investigate. Your mission: without endangering the Crystal Gems, keep whatever gems that arrived inside the Roaming Eyes from escaping! That's right, it's time to <i>Hit The Diamond!</i>";
     var instructions = $("<span>").text("Gems will pop out of the doors. If they're not Garnet, Amethyst, Pearl, Peridot, or Lapis Lazuli, click on them to knock them back down. If you hit a Crystal Gem, it'll cost you a star. The game ends when all the stars are gone. Good luck!");
-    instructions.append($("<ul class='instructions'>").append(gems.filter(function (g) { return g.score > 0 }).map(gemIconMaker())));
+    instructions.append($("<ul class='instructions'>").append(gems.filter(function (g) { return g.score > 0 }).sort(function (a, b) { return b.score - a.score; }).map(gemIconMaker())));
     var gameovertext = "You scored %S points. %H Here's the damage:";
     var credits = $("<span>").text("Credits").append($("<ul>").addClass("credits").append([
-        { credit: "Programming", by: "Dave", link: "http://www.beachcitybugle.com/" },
+        { credit: "Design, Programming", by: "Dave", link: "http://www.beachcitybugle.com/" },
         { credit: "Art", by: "Steven Universe", link: "http://www.cartoonnetwork.com/video/steven-universe/" },
         { credit: "Crewniverse Font", by: "MaxiGamer", link: "http://fav.me/d8xkpe8" },
+        { credit: "Yellow Pearl Vector", by: "Deco-kun", link: "http://steven-universe.wikia.com/wiki/User:Deco-kun" },
         { credit: "Special Thanks", by: "Steven Universe Wiki", link: "http://steven-universe.wikia.com/" }
     ].map(function (c) {
         return $("<li>").append($("<span>").text(c.credit)).append($(c.link ? "<a target='_blank' href='" + c.link + "'>" : "<span>").text(c.by));
