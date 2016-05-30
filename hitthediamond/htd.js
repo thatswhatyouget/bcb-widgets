@@ -44,8 +44,8 @@ function HitTheDiamond(selector) {
         new Gem('Yellow Pearl', 5, "hitthediamond/img/gems/yellow-pearl.png", "hitthediamond/img/gems/yellow-pearl-hit.png"),
         new Gem('Mad-Eye Ruby', 3, "hitthediamond/img/gems/mad-eye.png", "hitthediamond/img/gems/mad-eye-hit.png"),
         new Gem('Garnet', 0, "hitthediamond/img/gems/garnet.png", "hitthediamond/img/gems/garnet.png"),
-        new Gem('Pearl', 0, "hitthediamond/img/gems/pearl.png", "hitthediamond/img/gems/pearl-hit.png"),
         new Gem('Amethyst', 0, "hitthediamond/img/gems/amethyst.png", "hitthediamond/img/gems/amethyst-hit.png"),
+        new Gem('Pearl', 0, "hitthediamond/img/gems/pearl.png", "hitthediamond/img/gems/pearl-hit.png"),
         new Gem('Peridot', 0, "hitthediamond/img/gems/peridot.png", "hitthediamond/img/gems/peridot-hit.png"),
         new Gem('Lapis Lazuli', 0, "hitthediamond/img/gems/lapis.png", "hitthediamond/img/gems/lapis-hit.png"),
     ];
@@ -74,9 +74,12 @@ function HitTheDiamond(selector) {
         }
         var promise = deferred.promise();
         promise.always(function () {
-            $dialog.hide().remove();
+            $dialog.addClass('hidden');
+            setTimeout(function () { $dialog.hide().remove(); }, 1000);
         });
         $game.append($dialog);
+        $dialog.addClass('hidden').css('opacity');
+        setTimeout(function () { $dialog.removeClass('hidden'); }, 10);
         return promise;
     }
 
@@ -186,7 +189,7 @@ function HitTheDiamond(selector) {
             window.localStorage.setItem("htd-highscore", highscore);
         }
         $game.addClass('over').removeClass('running').find('.gem').removeClass('popped');
-        var text = $('<span>').text(gameovertext.replace('%S', score).replace('%H', highscore == score ? "That's a new personal record!" : "Nice work."))
+        var text = $('<span>').text(gameovertext.replace('%S', score).replace('%H', highscore == score ? "That's a new personal record!" : score < 1 ? "Traitor!" : score < 100 ? "Thanks for playing." : "Nice work!"))
             .append($('<ul class="instructions">').append(gems.filter(function (g) {
                 return g.hits > 0;
             }).sort(function (a, b) {
