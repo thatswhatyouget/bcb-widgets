@@ -6,8 +6,8 @@ function HitTheDiamond(selector) {
     var score = 0, highscore = parseInt(window.localStorage.getItem('htd-highscore') || '0'), fails = 0;
 
     var audible = false, currentSecond = 0, audio = $("<audio preload='auto'>").append([
-        { src: "hitthediamond/snd/gems.ogg", type: "audio/ogg" },
-        { src: "hitthediamond/snd/gems.mp3", type: "audio/mp3" }
+        { src: "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.ogg", type: "audio/ogg" },
+        { src: "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp3", type: "audio/mp3" }
     ].map(function (snd) {
         return $("<source>").attr(snd);
     })).on('timeupdate', function () {
@@ -72,15 +72,15 @@ function HitTheDiamond(selector) {
         this.hits = 0;
     }
     var gems = [
-        new Gem('Yellow Diamond', 11, "hitthediamond/img/gems/yellow-diamond.png", "hitthediamond/img/gems/yellow-diamond-hit.png", 7),
-        new Gem('Jasper', 7, "hitthediamond/img/gems/jasper.png", "hitthediamond/img/gems/jasper-hit.png", 2),
-        new Gem('Yellow Pearl', 5, "hitthediamond/img/gems/yellow-pearl.png", "hitthediamond/img/gems/yellow-pearl-hit.png", 8),
-        new Gem('Mad-Eye Ruby', 3, "hitthediamond/img/gems/mad-eye.png", "hitthediamond/img/gems/mad-eye-hit.png", 6),
-        new Gem('Garnet', 0, "hitthediamond/img/gems/garnet.png", "hitthediamond/img/gems/garnet.png", 1),
-        new Gem('Amethyst', 0, "hitthediamond/img/gems/amethyst.png", "hitthediamond/img/gems/amethyst-hit.png", 0),
-        new Gem('Pearl', 0, "hitthediamond/img/gems/pearl.png", "hitthediamond/img/gems/pearl-hit.png", 4),
-        new Gem('Peridot', 0, "hitthediamond/img/gems/peridot.png", "hitthediamond/img/gems/peridot-hit.png", 5),
-        new Gem('Lapis Lazuli', 0, "hitthediamond/img/gems/lapis.png", "hitthediamond/img/gems/lapis-hit.png", 3),
+        new Gem('Yellow Diamond', 11, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-diamond.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-diamond-hit.png", 7),
+        new Gem('Jasper', 7, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/jasper.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/jasper-hit.png", 2),
+        new Gem('Yellow Pearl', 5, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-pearl.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-pearl-hit.png", 8),
+        new Gem('Mad-Eye Ruby', 3, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/mad-eye.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/mad-eye-hit.png", 6),
+        new Gem('Garnet', 0, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/garnet.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/garnet.png", 1),
+        new Gem('Amethyst', 0, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/amethyst.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/amethyst-hit.png", 0),
+        new Gem('Pearl', 0, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/pearl.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/pearl-hit.png", 4),
+        new Gem('Peridot', 0, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/peridot.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/peridot-hit.png", 5),
+        new Gem('Lapis Lazuli', 0, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/lapis.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/lapis-hit.png", 3),
     ];
 
     function Dialog(text, yesText, noText, waitForPromise) {
@@ -211,7 +211,7 @@ function HitTheDiamond(selector) {
         return gem.img;
     }), gems.map(function (gem) {
         return gem.hitImg;
-    })).concat("hitthediamond/img/eyepod.png", "hitthediamond/img/eyepod-fore.png").map(function (img) {
+    })).concat("http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/eyepod.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/eyepod-fore.png").map(function (img) {
         var deferred = $.Deferred();
         $('<img>').on('load', function () { deferred.resolve(); }).attr('src', img);
         return deferred.promise();
