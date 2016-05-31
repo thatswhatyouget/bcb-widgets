@@ -295,7 +295,8 @@
                 }
                 
                 .bcb-hit-the-diamond .eyepod .gems > .gem > img {
-                    width:160px;
+                    width:160px!important;
+		    height:auto!important;
                     pointer-events: all;   
                     position: absolute;
                     left:0;
