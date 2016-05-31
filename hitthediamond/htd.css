@@ -130,6 +130,7 @@
         color:white;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         padding:1em;
+        line-height:1.1em;
         transition: all .5s ease-in-out;
     }
         .bcb-hit-the-diamond .dialog.hidden {
