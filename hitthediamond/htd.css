@@ -350,6 +350,7 @@
 
 /*Browser Compatibility*/
 .bcb-hit-the-diamond[data-useragent*='MSIE 10.0'] .eyepod {
-	height:240px;
-	margin-top:149px;
+	height:242px;
+	margin-top:50px;
+	background-position:bottom;
 }
