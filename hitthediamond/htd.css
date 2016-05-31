@@ -219,7 +219,7 @@
                 }
                 
                     .bcb-hit-the-diamond .instructions > li > .icon.YellowDiamond, .bcb-hit-the-diamond .instructions > li > .icon.YellowPearl.hitImg {
-                        background-position-y: 35%;
+                        background-position: 50% 35%;
                     }
         
     .bcb-hit-the-diamond .eyepod {
