@@ -319,9 +319,9 @@
 	background-color:transparent;
 	border:none;
 	padding:0;
-	max-width:auto;
+	max-width:1000px;
 	height: auto !important;
-	border-radius:none;
+	border-radius:0;
 	transition:none;
 	margin: 0;
 }
