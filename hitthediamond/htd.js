@@ -5,6 +5,38 @@ function HitTheDiamond(selector) {
 
     var score = 0, highscore = parseInt(window.localStorage.getItem('htd-highscore') || '0'), fails = 0;
 
+    var audible = false, currentSecond = 0, audio = $("<audio preload='auto'>").append([
+        { src: "hitthediamond/snd/gems.ogg", type: "audio/ogg" },
+        { src: "hitthediamond/snd/gems.mp3", type: "audio/mp3" }
+    ].map(function (snd) {
+        return $("<source>").attr(snd);
+    })).on('timeupdate', function () {
+        console.log(audio.currentTime);
+        if (Math.floor(audio.currentTime) > Math.floor(currentSecond)) {
+            audio.pause();
+        }
+    }).appendTo($game).get()[0];
+
+    $("<div class='muteButton'>").click(function () {
+        audible = !audible;
+        $game.toggleClass('unmuted', audible);
+    }).appendTo($game);
+
+    function playSound(second) {
+        setTimeout(function () {
+            try {
+                if (audio && audible) {
+                    currentSecond = audio.currentTime = second * 2;
+                    if (currentSecond > 0) audio.currentTime -= .05;
+                    setTimeout(function () { audio.play() }, 10);
+                }
+            }
+            catch (e) {
+                console.error(e);
+            }
+        }, 10);
+    }
+
     function addScore(points) {
         score += points;
         $game.attr('data-score', score);
@@ -27,27 +59,28 @@ function HitTheDiamond(selector) {
         e.preventDefault();
     });
 
-    function Gem(name, score, img, hitImg) {
+    function Gem(name, score, img, hitImg, soundsec) {
         img = img || score;
         score = parseInt(score) || 0;
         var safename = name.replace(/[^A-Z0-9]/ig, '');
         this.name = name;
         this.img = img;
         this.hitImg = hitImg || img;
+        this.soundsec = soundsec || 0;
         this.score = score;
         this.toString = function () { return safename; };
         this.hits = 0;
     }
     var gems = [
-        new Gem('Yellow Diamond', 11, "hitthediamond/img/gems/yellow-diamond.png", "hitthediamond/img/gems/yellow-diamond-hit.png"),
-        new Gem('Jasper', 7, "hitthediamond/img/gems/jasper.png", "hitthediamond/img/gems/jasper-hit.png"),
-        new Gem('Yellow Pearl', 5, "hitthediamond/img/gems/yellow-pearl.png", "hitthediamond/img/gems/yellow-pearl-hit.png"),
-        new Gem('Mad-Eye Ruby', 3, "hitthediamond/img/gems/mad-eye.png", "hitthediamond/img/gems/mad-eye-hit.png"),
-        new Gem('Garnet', 0, "hitthediamond/img/gems/garnet.png", "hitthediamond/img/gems/garnet.png"),
-        new Gem('Amethyst', 0, "hitthediamond/img/gems/amethyst.png", "hitthediamond/img/gems/amethyst-hit.png"),
-        new Gem('Pearl', 0, "hitthediamond/img/gems/pearl.png", "hitthediamond/img/gems/pearl-hit.png"),
-        new Gem('Peridot', 0, "hitthediamond/img/gems/peridot.png", "hitthediamond/img/gems/peridot-hit.png"),
-        new Gem('Lapis Lazuli', 0, "hitthediamond/img/gems/lapis.png", "hitthediamond/img/gems/lapis-hit.png"),
+        new Gem('Yellow Diamond', 11, "hitthediamond/img/gems/yellow-diamond.png", "hitthediamond/img/gems/yellow-diamond-hit.png", 7),
+        new Gem('Jasper', 7, "hitthediamond/img/gems/jasper.png", "hitthediamond/img/gems/jasper-hit.png", 2),
+        new Gem('Yellow Pearl', 5, "hitthediamond/img/gems/yellow-pearl.png", "hitthediamond/img/gems/yellow-pearl-hit.png", 8),
+        new Gem('Mad-Eye Ruby', 3, "hitthediamond/img/gems/mad-eye.png", "hitthediamond/img/gems/mad-eye-hit.png", 6),
+        new Gem('Garnet', 0, "hitthediamond/img/gems/garnet.png", "hitthediamond/img/gems/garnet.png", 1),
+        new Gem('Amethyst', 0, "hitthediamond/img/gems/amethyst.png", "hitthediamond/img/gems/amethyst-hit.png", 0),
+        new Gem('Pearl', 0, "hitthediamond/img/gems/pearl.png", "hitthediamond/img/gems/pearl-hit.png", 4),
+        new Gem('Peridot', 0, "hitthediamond/img/gems/peridot.png", "hitthediamond/img/gems/peridot-hit.png", 5),
+        new Gem('Lapis Lazuli', 0, "hitthediamond/img/gems/lapis.png", "hitthediamond/img/gems/lapis-hit.png", 3),
     ];
 
     function Dialog(text, yesText, noText, waitForPromise) {
@@ -109,6 +142,7 @@ function HitTheDiamond(selector) {
                         gem.hits++;
                         if (gem.score > 0) addScore(gem.score);
                         else addFail();
+                        playSound(gem.soundsec);
                     }).append($("<img>").attr('src', gem.img)).append($("<img>").attr('src', gem.hitImg)));
                     deferred.resolve();
                 }, 1);
@@ -159,7 +193,7 @@ function HitTheDiamond(selector) {
         }
     }
 
-    var introtext = "The Roaming Eyes have landed! Nobody knows what lurks inside, but the Crystal Gems have gone in to investigate. Your mission: without endangering the Crystal Gems, keep whatever gems that arrived inside the Roaming Eyes from escaping! That's right, it's time to <i>Hit The Diamond!</i>";
+    var introtext = "The Roaming Eyes have landed! Nobody knows what lurks inside, but the Crystal Gems have gone in to investigate. Your mission: without endangering the Crystal Gems, keep whatever gems that arrived inside the Roaming Eyes from escaping. That's right, it's time to <i>Hit The Diamond!</i>";
     var instructions = $("<span>").text("Gems will pop out of the doors. If they're not Garnet, Amethyst, Pearl, Peridot, or Lapis Lazuli, click on them to knock them back down. If you hit a Crystal Gem, it'll cost you a star. The game ends when all the stars are gone. Good luck!");
     instructions.append($("<ul class='instructions'>").append(gems.filter(function (g) { return g.score > 0 }).sort(function (a, b) { return b.score - a.score; }).map(gemIconMaker())));
     var gameovertext = "You scored %S points. %H Here's the damage:";

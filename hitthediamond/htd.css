@@ -41,6 +41,7 @@
         top:20%;
         left:0;
         width:100%;
+        font-size: 16px;
         text-align: center;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-weight: bold;
@@ -90,6 +91,31 @@
     .bcb-hit-the-diamond a {
         color:#9ae5f4!important;   
     }
+    
+    .bcb-hit-the-diamond .muteButton {
+        position: absolute;
+        top:.1em;
+        right:.1em;
+        font-size:20px;
+        font-family: FontAwesome;
+        color:black;
+        opacity: .5;
+        cursor: pointer;
+        width: 1em;
+        text-align: left;
+    }
+    
+        .bcb-hit-the-diamond .muteButton:hover {
+            opacity: 1;   
+        }
+        
+        .bcb-hit-the-diamond .muteButton:before {
+            content: "\f026";
+        }
+        
+            .bcb-hit-the-diamond.unmuted .muteButton:before {
+                content: "\f028";   
+            }
     
     .bcb-hit-the-diamond .dialog {
         position: absolute;
