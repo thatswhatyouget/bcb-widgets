@@ -107,12 +107,12 @@ function HitTheDiamond(selector) {
         }
         var promise = deferred.promise();
         promise.always(function () {
-            $dialog.addClass('hidden');
+            $dialog.addClass('offscreen');
             setTimeout(function () { $dialog.hide().remove(); }, 1000);
         });
         $game.append($dialog);
-        $dialog.addClass('hidden').css('opacity');
-        setTimeout(function () { $dialog.removeClass('hidden'); }, 10);
+        $dialog.addClass('offscreen').css('opacity');
+        setTimeout(function () { $dialog.removeClass('offscreen'); }, 10);
         return promise;
     }
 

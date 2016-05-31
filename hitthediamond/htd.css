@@ -134,7 +134,7 @@
         line-height:1.1em;
         transition: all .5s ease-in-out;
     }
-        .bcb-hit-the-diamond .dialog.hidden {
+        .bcb-hit-the-diamond .dialog.offscreen {
             bottom:-100%;
             opacity: .1; 
         }
