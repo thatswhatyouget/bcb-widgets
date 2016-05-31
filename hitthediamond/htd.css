@@ -347,3 +347,9 @@
 	border-style:inset;
 	box-shadow: none;		
 }
+
+/*Browser Compatibility*/
+.bcb-hit-the-diamond[data-useragent*='MSIE 10.0'] .eyepod {
+	height:240px;
+	margin-top:149px;
+}

@@ -1,5 +1,5 @@
 function HitTheDiamond(selector) {
-    var $game = $(selector).addClass('bcb-hit-the-diamond');
+    var $game = $(selector).addClass('bcb-hit-the-diamond').attr('data-useragent', navigator.userAgent);
 
     var stars = 10;
 
