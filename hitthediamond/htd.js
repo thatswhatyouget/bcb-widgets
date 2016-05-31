@@ -6,8 +6,8 @@ function HitTheDiamond(selector) {
     var score = 0, highscore = parseInt(window.localStorage.getItem('htd-highscore') || '0'), fails = 0;
 
     var audible = false, currentSecond = 0, audio = $("<audio preload='auto'>").append([
-        { src: "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.ogg", type: "audio/ogg" },
-        { src: "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp3", type: "audio/mp3" }
+        { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.ogg", type: "audio/ogg" },
+        { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp3", type: "audio/mp3" }
     ].map(function (snd) {
         return $("<source>").attr(snd);
     })).on('timeupdate', function () {
@@ -72,15 +72,15 @@ function HitTheDiamond(selector) {
         this.hits = 0;
     }
     var gems = [
-        new Gem('Yellow Diamond', 11, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-diamond.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-diamond-hit.png", 7),
-        new Gem('Jasper', 7, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/jasper.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/jasper-hit.png", 2),
-        new Gem('Yellow Pearl', 5, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-pearl.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-pearl-hit.png", 8),
-        new Gem('Mad-Eye Ruby', 3, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/mad-eye.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/mad-eye-hit.png", 6),
-        new Gem('Garnet', 0, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/garnet.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/garnet.png", 1),
-        new Gem('Amethyst', 0, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/amethyst.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/amethyst-hit.png", 0),
-        new Gem('Pearl', 0, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/pearl.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/pearl-hit.png", 4),
-        new Gem('Peridot', 0, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/peridot.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/peridot-hit.png", 5),
-        new Gem('Lapis Lazuli', 0, "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/lapis.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/lapis-hit.png", 3),
+        new Gem('Yellow Diamond', 11, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-diamond.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-diamond-hit.png", 7),
+        new Gem('Jasper', 7, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/jasper.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/jasper-hit.png", 2),
+        new Gem('Yellow Pearl', 5, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-pearl.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-pearl-hit.png", 8),
+        new Gem('Mad-Eye Ruby', 3, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/mad-eye.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/mad-eye-hit.png", 6),
+        new Gem('Garnet', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/garnet.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/garnet.png", 1),
+        new Gem('Amethyst', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/amethyst.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/amethyst-hit.png", 0),
+        new Gem('Pearl', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/pearl.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/pearl-hit.png", 4),
+        new Gem('Peridot', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/peridot.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/peridot-hit.png", 5),
+        new Gem('Lapis Lazuli', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/lapis.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/lapis-hit.png", 3),
     ];
 
     function Dialog(text, yesText, noText, waitForPromise) {
@@ -198,11 +198,11 @@ function HitTheDiamond(selector) {
     instructions.append($("<ul class='instructions'>").append(gems.filter(function (g) { return g.score > 0 }).sort(function (a, b) { return b.score - a.score; }).map(gemIconMaker())));
     var gameovertext = "You scored %S points. %H Here's the damage:";
     var credits = $("<span>").text("Credits").append($("<ul>").addClass("credits").append([
-        { credit: "Design, Programming", by: "Dave", link: "http://www.beachcitybugle.com/" },
-        { credit: "Art, Sound", by: "Steven Universe", link: "http://www.cartoonnetwork.com/video/steven-universe/" },
-        { credit: "Crewniverse Font", by: "MaxiGamer", link: "http://fav.me/d8xkpe8" },
-        { credit: "Yellow Pearl Vector", by: "Deco-kun", link: "http://steven-universe.wikia.com/wiki/User:Deco-kun" },
-        { credit: "Special Thanks", by: "Steven Universe Wiki", link: "http://steven-universe.wikia.com/" }
+        { credit: "Design, Programming", by: "Dave", link: "https://www.beachcitybugle.com/" },
+        { credit: "Art, Sound", by: "Steven Universe", link: "https://www.cartoonnetwork.com/video/steven-universe/" },
+        { credit: "Crewniverse Font", by: "MaxiGamer", link: "https://fav.me/d8xkpe8" },
+        { credit: "Yellow Pearl Vector", by: "Deco-kun", link: "https://steven-universe.wikia.com/wiki/User:Deco-kun" },
+        { credit: "Special Thanks", by: "Steven Universe Wiki", link: "https://steven-universe.wikia.com/" }
     ].map(function (c) {
         return $("<li>").append($("<span>").text(c.credit)).append($(c.link ? "<a target='_blank' href='" + c.link + "'>" : "<span>").text(c.by));
     })));
@@ -211,7 +211,7 @@ function HitTheDiamond(selector) {
         return gem.img;
     }), gems.map(function (gem) {
         return gem.hitImg;
-    })).concat("http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/eyepod.png", "http://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/eyepod-fore.png").map(function (img) {
+    })).concat("https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/eyepod.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/eyepod-fore.png").map(function (img) {
         var deferred = $.Deferred();
         $('<img>').on('load', function () { deferred.resolve(); }).attr('src', img);
         return deferred.promise();
