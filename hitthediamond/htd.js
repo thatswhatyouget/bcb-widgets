@@ -200,6 +200,7 @@ function HitTheDiamond(selector) {
     var credits = $("<span>").text("Credits").append($("<ul>").addClass("credits").append([
         { credit: "Design, Programming", by: "Dave", link: "http://www.beachcitybugle.com/" },
         { credit: "Art, Sound", by: "Steven Universe", link: "http://www.cartoonnetwork.com/video/steven-universe/" },
+        { credit: "Testing", by: "Emerald", link: "https://twitter.com/gaygemgoddess" },
         { credit: "Crewniverse Font", by: "MaxiGamer", link: "http://fav.me/d8xkpe8" },
         { credit: "Yellow Pearl Vector", by: "Deco-kun", link: "http://steven-universe.wikia.com/wiki/User:Deco-kun" },
         { credit: "Special Thanks", by: "Steven Universe Wiki", link: "http://steven-universe.wikia.com/" }
@@ -211,7 +212,7 @@ function HitTheDiamond(selector) {
         return gem.img;
     }), gems.map(function (gem) {
         return gem.hitImg;
-    })).concat("https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/eyepod.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/eyepod-fore.png").map(function (img) {
+    })).concat("https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/eyepod.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/eyepod-fore.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/hammerdot.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/hammerdown.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gameover.png").map(function (img) {
         var deferred = $.Deferred();
         $('<img>').on('load', function () { deferred.resolve(); }).attr('src', img);
         return deferred.promise();
