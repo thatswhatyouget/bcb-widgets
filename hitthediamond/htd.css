@@ -276,7 +276,7 @@
         }
 
 		.bcb-hit-the-diamond .eyepod .gems.init {
-			display:none;
+			opacity:0;
 		}
 
 
