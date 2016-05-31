@@ -275,10 +275,15 @@
             transform:rotateZ(5deg);
         }
 
+		.bcb-hit-the-diamond .eyepod .gems.init {
+			display:none;
+		}
+
+
         
-        .bcb-hit-the-diamond .eyepod:nth-of-type(2n) .gems {
-            transform:rotateZ(5deg)rotateY(180deg);   
-        }
+	        .bcb-hit-the-diamond .eyepod:nth-of-type(2n) .gems {
+	            transform:rotateZ(5deg)rotateY(180deg);   
+	        }
         
             .bcb-hit-the-diamond .eyepod .gems > .gem {
                 position: absolute;
@@ -287,10 +292,6 @@
                 margin-bottom:-500px;
                 transition: all .5s ease-in-out;
             }
-
-		.bcb-hit-the-diamond .eyepod .gems > .gem.init {
-			display:none;
-		}
 
 
                 .bcb-hit-the-diamond .eyepod .gems > .gem.popped {

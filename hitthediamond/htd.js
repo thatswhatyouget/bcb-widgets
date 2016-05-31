@@ -155,7 +155,7 @@ function HitTheDiamond(selector) {
         addScore(score = 0);
         fails = 0;
         gems.forEach(function (gem) { gem.hits = 0; });
-        $game.addClass("running").find('.gem').removeClass('popped hit').addClass('init');
+        $game.addClass("running").find('.gems').addClass('init').find('.gem').removeClass('popped hit');
         $game.find('.stars .used').removeClass('used');
         setTimeout(function () { pop(1500); }, 1000);
     }
@@ -177,8 +177,8 @@ function HitTheDiamond(selector) {
         else {
             popgems.forEach(function (gem) {
                 var $pop = $(rando($game.find('.gem.' + gem.toString()).removeClass('popped')));
-                $pop.parents('.gems').find('.gem').removeClass('popped');
-                $pop.addClass('popped').removeClass('hit init');
+                $pop.parents('.gems').removeClass('init').find('.gem').removeClass('popped');
+                $pop.addClass('popped').removeClass('hit');
             });
         }
         interval = interval > 100 ? interval - 5 : interval;
