@@ -16,13 +16,13 @@
 
     .bcb-hit-the-diamond.running {
         cursor: crosshair;
-        cursor: url("img/hammerdot.cur") 10 110, crosshair;
-        cursor: url("img/hammerdot.png") 10 110, url("img/hammerdot.cur") 10 110, crosshair;   
+        cursor: url('img/hammer.cur'), crosshair;
+        cursor: url("img/hammerdot.png") 10 110, url('img/hammer.cur'), crosshair;   
     }
         .bcb-hit-the-diamond.running.mouseDown {
             cursor: cell;
-            cursor: url("img/hammerdot.cur") 10 110, cell;
-            cursor: url("img/hammerdown.png") 22 72, url("img/hammerdot.cur") 10 110, cell;
+            cursor: url('img/hammerdown.cur'), cell;
+            cursor: url("img/hammerdown.png") 22 72, url('img/hammerdown.cur'), cell;
         }
     
     .bcb-hit-the-diamond:before {
