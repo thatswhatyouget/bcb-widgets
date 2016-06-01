@@ -6,7 +6,7 @@ function HitTheDiamond(selector) {
     var score = 0, highscore = parseInt(window.localStorage.getItem('htd-highscore') || '0'), fails = 0;
 
     var audible = false, currentSecond = 0, audio = $("<audio preload='auto'>").append([
-        { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp4", type: "audio/aac" },
+        { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp4", type: "audio/mp4" },
         { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.ogg", type: "audio/ogg" },
         { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp3", type: "audio/mp3" }
     ].map(function (snd) {
@@ -72,14 +72,15 @@ function HitTheDiamond(selector) {
         this.toString = function () { return safename; };
         this.hits = 0;
         this.playSound = function () {
-            if (!audible) return;
+            return playSound(this.soundsec);
+            /*if (!audible) return;
             var snd = audio.cloneNode(true);
             snd.currentTime = this.soundsec * 2;
             setTimeout(function () {
                 snd.pause();
                 delete snd;
             }, 1000);
-            snd.play();
+            snd.play();*/
         }
     }
     var gems = [
