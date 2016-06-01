@@ -103,7 +103,7 @@ function HitTheDiamond(selector) {
         e.preventDefault();
     });
 
-    function Gem(name, score, img, hitImg, soundIndex) {
+    function Gem(name, score, img, hitImg, soundIndex, loneTarget) {
         img = img || score;
         score = parseInt(score) || 0;
         var safename = name.replace(/[^A-Z0-9]/ig, '');
@@ -113,6 +113,7 @@ function HitTheDiamond(selector) {
         this.score = score;
         this.toString = function () { return safename; };
         this.hits = 0;
+        this.loneTarget = loneTarget || "What did " + name + " ever do to you?";
         this.playSound = function () {
             return playSound(soundIndex || 0);
         }
@@ -122,11 +123,11 @@ function HitTheDiamond(selector) {
         new Gem('Jasper', 7, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/jasper.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/jasper-hit.png", 2),
         new Gem('Yellow Pearl', 5, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-pearl.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-pearl-hit.png", 8),
         new Gem('Mad-Eye Ruby', 3, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/mad-eye.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/mad-eye-hit.png", 6),
-        new Gem('Garnet', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/garnet.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/garnet.png", 1),
+        new Gem('Garnet', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/garnet.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/garnet.png", 1, "You're grounded."),
         new Gem('Amethyst', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/amethyst.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/amethyst-hit.png", 0),
-        new Gem('Pearl', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/pearl.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/pearl-hit.png", 4),
-        new Gem('Peridot', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/peridot.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/peridot-hit.png", 5),
-        new Gem('Lapis Lazuli', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/lapis.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/lapis-hit.png", 3),
+        new Gem('Pearl', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/pearl.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/pearl-hit.png", 4, "Leave Pearl alone!"),
+        new Gem('Peridot', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/peridot.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/peridot-hit.png", 5, "Poor Peridot."),
+        new Gem('Lapis Lazuli', 0, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/lapis.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/lapis-hit.png", 3, "No love for Lapis?"),
     ];
 
     function Dialog(text, yesText, noText, waitForPromise) {
@@ -275,14 +276,18 @@ function HitTheDiamond(selector) {
         }
         $game.addClass('over').removeClass('running').find('.gem').removeClass('popped');
         startStopMusic();
+        var hitlist = gems.filter(function (g) {
+            return g.hits > 0;
+        }).sort(function (a, b) {
+            return b.hits - a.hits;
+        });
         var text = $('<span>').text(gameovertext.replace('%S', score).replace('%H', highscore == score ? "That's a new personal record!" : score < 1 ? "Traitor!" : score < 100 ? "Thanks for playing." : "Nice work!"))
-            .append($('<ul class="instructions">').append(gems.filter(function (g) {
-                return g.hits > 0;
-            }).sort(function (a, b) {
-                return b.hits - a.hits;
-            }).map(gemIconMaker("hitImg", function (gem) {
+            .append($('<ul class="instructions">').append(hitlist.map(gemIconMaker("hitImg", function (gem) {
                 return gem.hits + " hit" + (gem.hits > 1 ? "s" : "");
             }))));
+        if (hitlist.length < 2) {
+            text.append(hitlist[0].loneTarget);
+        }
         Dialog(text, "Play Again", "Credits").then(function (s) { return s; }, function (f) {
             return Dialog(credits, "Play Again");
         }).then(Intro);
