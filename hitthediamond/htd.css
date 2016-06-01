@@ -96,7 +96,7 @@
         color:#9ae5f4!important;   
     }
     
-    .bcb-hit-the-diamond .muteButton {
+    .bcb-hit-the-diamond .muteButton, .bcb-hit-the-diamond .muteMusic {
         position: absolute;
         top:.1em;
         right:.1em;
@@ -109,7 +109,11 @@
         text-align: left;
     }
     
-        .bcb-hit-the-diamond .muteButton:hover {
+    .bcb-hit-the-diamond .muteButton ~ .muteMusic {
+        right:1.6em;
+    }
+    
+        .bcb-hit-the-diamond .muteButton:hover, .bcb-hit-the-diamond .muteMusic:hover {
             opacity: 1;   
         }
         
@@ -119,6 +123,22 @@
         
             .bcb-hit-the-diamond.unmuted .muteButton:before {
                 content: "\f028";   
+            }
+            
+        .bcb-hit-the-diamond .muteMusic:before {
+            content: "\f001";   
+        }
+        
+        .bcb-hit-the-diamond .muteMusic:after {
+            position: absolute;
+            left:.05em;
+            color:red;
+            content: "\f05e";
+            transform:rotateY(180deg); 
+        }
+        
+            .bcb-hit-the-diamond.musicOn .muteMusic:after {
+                content:'';   
             }
     
     .bcb-hit-the-diamond .dialog {

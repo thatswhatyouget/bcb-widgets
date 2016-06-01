@@ -3,6 +3,8 @@ function HitTheDiamond(selector) {
 
     var stars = 10;
 
+    var music = null, musicOn = false;
+
     var score = 0, highscore = parseInt(window.localStorage.getItem('htd-highscore') || '0'), fails = 0;
 
     var audible = false, currentSecond = 0, audio = $("<audio preload='auto'>").append([
@@ -17,13 +19,14 @@ function HitTheDiamond(selector) {
         }
     }).on('canplaythrough', function () {
         if ($game.find('.muteButton').is('*')) return;
-        audible = window.localStorage.getItem("htd-muted") == "unmuted";
+        audible = window.localStorage.getItem("htd-sounds") == "unmuted";
         $game.toggleClass('unmuted', audible);
         $("<div class='muteButton'>").click(function () {
             audible = !audible;
             $game.toggleClass('unmuted', audible);
-            window.localStorage.setItem("htd-muted", audible ? "unmuted" : "muted");
-        }).appendTo($game);
+            window.localStorage.setItem("htd-sounds", audible ? "unmuted" : "muted");
+            startStopMusic();
+        }).prependTo($game);
     }).appendTo($game).get()[0];
 
     function playSound(soundIndex) {
@@ -39,6 +42,43 @@ function HitTheDiamond(selector) {
                 console.error(e);
             }
         }, 10);
+    }
+
+    try {
+        if (!music && typeof (SC) !== "undefined" && SC && SC.stream) {
+            SC.initialize({ client_id: "7ffb233b30724e7fde869307d0d5130c" });
+            SC.stream('/tracks/266892129').then(function (player) {
+                music = player;
+                player.setVolume(.25);
+                player.on('finish', function () {
+                    player.seek(0);
+                    player.play();
+                });
+                if ($game.find('.muteMusic').is('*')) return;
+                musicOn = window.localStorage.getItem("htd-music") == "unmuted";
+                $game.toggleClass('musicOn', musicOn);
+                $("<div class='muteMusic'>").click(function () {
+                    musicOn = !musicOn;
+                    $game.toggleClass('musicOn', musicOn);
+                    window.localStorage.setItem("htd-music", musicOn ? "unmuted" : "muted");
+                    startStopMusic();
+                }).appendTo($game);
+            });
+        }
+    }
+    catch (e) {
+        console.error(e);
+    }
+
+    function startStopMusic(reset) {
+        if (music && music.play && music.pause) {
+            if (reset)
+                music.seek(0);
+            if ($game.is('.running') && musicOn)
+                music.play();
+            else
+                music.pause();
+        }
     }
 
     function addScore(points) {
@@ -163,6 +203,7 @@ function HitTheDiamond(selector) {
         gems.forEach(function (gem) { gem.hits = 0; });
         $game.addClass("running").find('.gems').addClass('init').find('.gem').removeClass('popped hit');
         $game.find('.stars .used').removeClass('used');
+        startStopMusic(true);
         setTimeout(function () { pop(1500); }, 1000);
     }
 
@@ -206,6 +247,7 @@ function HitTheDiamond(selector) {
     var credits = $("<span>").text("Credits").append($("<ul>").addClass("credits").append([
         { credit: "Design, Programming", by: "Dave", link: "http://www.beachcitybugle.com/" },
         { credit: "Art, Sound", by: "Steven Universe", link: "http://www.cartoonnetwork.com/video/steven-universe/" },
+        { credit: "Music", by: "Aivi & Surasshu", link: "https://soundcloud.com/aivisura/steven-universe-futurisms" },
         { credit: "Testing", by: "Emerald", link: "https://twitter.com/gaygemgoddess" },
         { credit: "Crewniverse Font", by: "MaxiGamer", link: "http://fav.me/d8xkpe8" },
         { credit: "Yellow Pearl Vector", by: "Deco-kun", link: "http://steven-universe.wikia.com/wiki/User:Deco-kun" },
@@ -230,6 +272,7 @@ function HitTheDiamond(selector) {
             window.localStorage.setItem("htd-highscore", highscore);
         }
         $game.addClass('over').removeClass('running').find('.gem').removeClass('popped');
+        startStopMusic();
         var text = $('<span>').text(gameovertext.replace('%S', score).replace('%H', highscore == score ? "That's a new personal record!" : score < 1 ? "Traitor!" : score < 100 ? "Thanks for playing." : "Nice work!"))
             .append($('<ul class="instructions">').append(gems.filter(function (g) {
                 return g.hits > 0;
