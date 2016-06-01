@@ -11,7 +11,6 @@ function HitTheDiamond(selector) {
     ].map(function (snd) {
         return $("<source>").attr(snd);
     })).on('timeupdate', function () {
-        console.log(audio.currentTime);
         if (Math.floor(audio.currentTime) > Math.floor(currentSecond)) {
             audio.pause();
         }
@@ -70,6 +69,16 @@ function HitTheDiamond(selector) {
         this.score = score;
         this.toString = function () { return safename; };
         this.hits = 0;
+        this.playSound = function () {
+            if (!audible) return;
+            var snd = audio.cloneNode(true);
+            snd.currentTime = this.soundsec * 2;
+            setTimeout(function () {
+                snd.pause();
+                delete snd;
+            }, 1000);
+            snd.play();
+        }
     }
     var gems = [
         new Gem('Yellow Diamond', 11, "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-diamond.png", "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/img/gems/yellow-diamond-hit.png", 7),
@@ -142,7 +151,7 @@ function HitTheDiamond(selector) {
                         gem.hits++;
                         if (gem.score > 0) addScore(gem.score);
                         else addFail();
-                        playSound(gem.soundsec);
+                        gem.playSound();
                     }).append($("<img>").attr('src', gem.img)).append($("<img>").attr('src', gem.hitImg)));
                     deferred.resolve();
                 }, 1);
@@ -243,7 +252,7 @@ function HitTheDiamond(selector) {
             return Dialog(instructions, "Start Game", preLoad);
         }).then(Setup).then(StartGame);
     }
-
+    
     if (typeof (requestAnimationFrame) === "function") {
         Intro();
     }
@@ -251,3 +260,24 @@ function HitTheDiamond(selector) {
         Dialog("Sorry, it looks like this game might not support your web browser. If at all possible, please consider <a href='https://browser-update.org/update.html' target='_blank'>updating</a> your browser.", "Try to Play Anyway", "Dismiss").then(Intro);
     }
 }
+
+//quick shims for oldnbusted browsers
+Array.prototype.map = Array.prototype.map || function (func) {
+    var output = [];
+    for (var i = 0; i < this.length; i++) {
+        output.push(func(this[i], i, this));
+    }
+    return output;
+};
+Array.prototype.filter = Array.prototype.filter || function (func) {
+    var output = [];
+    for (var i = 0; i < this.length; i++) {
+        if (func(this[i], i, this))
+            output.push(this[i]);
+    }
+    return output;
+};
+Array.prototype.forEach = Array.prototype.forEach || function (func) {
+    this.map(func);
+};
+Array.prototype.sort = Array.prototype.sort || function () { return this; };
