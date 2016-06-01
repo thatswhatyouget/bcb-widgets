@@ -6,6 +6,7 @@ function HitTheDiamond(selector) {
     var score = 0, highscore = parseInt(window.localStorage.getItem('htd-highscore') || '0'), fails = 0;
 
     var audible = false, currentSecond = 0, audio = $("<audio preload='auto'>").append([
+        { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp4", type: "audio/aac" },
         { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.ogg", type: "audio/ogg" },
         { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp3", type: "audio/mp3" }
     ].map(function (snd) {
@@ -14,12 +15,13 @@ function HitTheDiamond(selector) {
         if (Math.floor(audio.currentTime) > Math.floor(currentSecond)) {
             audio.pause();
         }
+    }).on('canplaythrough', function () {
+        if ($game.find('muteButton').is('*')) return;
+        $("<div class='muteButton'>").click(function () {
+            audible = !audible;
+            $game.toggleClass('unmuted', audible);
+        }).appendTo($game);
     }).appendTo($game).get()[0];
-
-    $("<div class='muteButton'>").click(function () {
-        audible = !audible;
-        $game.toggleClass('unmuted', audible);
-    }).appendTo($game);
 
     function playSound(second) {
         setTimeout(function () {
@@ -252,7 +254,7 @@ function HitTheDiamond(selector) {
             return Dialog(instructions, "Start Game", preLoad);
         }).then(Setup).then(StartGame);
     }
-    
+
     if (typeof (requestAnimationFrame) === "function") {
         Intro();
     }
