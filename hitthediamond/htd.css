@@ -16,11 +16,13 @@
 
     .bcb-hit-the-diamond.running {
         cursor: crosshair;
-        cursor: url("img/hammerdot.png") 10 110, crosshair;   
+        cursor: url("img/hammerdot.cur") 10 110, crosshair;
+        cursor: url("img/hammerdot.png") 10 110, url("img/hammerdot.cur") 10 110, crosshair;   
     }
         .bcb-hit-the-diamond.running.mouseDown {
-            cursor:cell;
-            cursor: url("img/hammerdown.png") 22 72, cell;
+            cursor: cell;
+            cursor: url("img/hammerdot.cur") 10 110, cell;
+            cursor: url("img/hammerdown.png") 22 72, url("img/hammerdot.cur") 10 110, cell;
         }
     
     .bcb-hit-the-diamond:before {
@@ -183,17 +185,20 @@
     .bcb-hit-the-diamond .credits, .bcb-hit-the-diamond .instructions {
         list-style: none;   
     }
-    
-        .bcb-hit-the-diamond .credits > li > span:first-child {
-            display: inline-block;
-            min-width:40%;
-            text-align: right;
+        .bcb-hit-the-diamond .credits > li {
+            margin:.2em 0;    
         }
         
-            .bcb-hit-the-diamond .credits > li > span:first-child:after {
-                margin-right:1em;
-                content:':';
+            .bcb-hit-the-diamond .credits > li > span:first-child {
+                display: inline-block;
+                min-width:40%;
+                text-align: right;
             }
+            
+                .bcb-hit-the-diamond .credits > li > span:first-child:after {
+                    margin-right:1em;
+                    content:':';
+                }
         
         .bcb-hit-the-diamond .instructions {
             margin:0;
@@ -278,9 +283,6 @@
 		.bcb-hit-the-diamond .eyepod .gems.init {
 			opacity:0;
 		}
-
-
-        
 	        .bcb-hit-the-diamond .eyepod:nth-of-type(2n) .gems {
 	            transform:rotateZ(5deg)rotateY(180deg);   
 	        }
@@ -304,7 +306,7 @@
                 
                 .bcb-hit-the-diamond .eyepod .gems > .gem > img {
                     width:160px!important;
-		    height:auto!important;
+		            height:auto!important;
                     pointer-events: all;   
                     position: absolute;
                     left:0;
