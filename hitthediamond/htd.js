@@ -6,8 +6,8 @@ function HitTheDiamond(selector) {
     var score = 0, highscore = parseInt(window.localStorage.getItem('htd-highscore') || '0'), fails = 0;
 
     var audible = false, currentSecond = 0, audio = $("<audio preload='auto'>").append([
-        { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp4", type: "audio/mp4" },
         { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.ogg", type: "audio/ogg" },
+        { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp4", type: "audio/mp4" },
         { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp3", type: "audio/mp3" }
     ].map(function (snd) {
         return $("<source>").attr(snd);
@@ -16,18 +16,21 @@ function HitTheDiamond(selector) {
             audio.pause();
         }
     }).on('canplaythrough', function () {
-        if ($game.find('muteButton').is('*')) return;
+        if ($game.find('.muteButton').is('*')) return;
+        audible = window.localStorage.getItem("htd-muted") == "unmuted";
+        $game.toggleClass('unmuted', audible);
         $("<div class='muteButton'>").click(function () {
             audible = !audible;
             $game.toggleClass('unmuted', audible);
+            window.localStorage.setItem("htd-muted", audible ? "unmuted" : "muted");
         }).appendTo($game);
     }).appendTo($game).get()[0];
 
-    function playSound(second) {
+    function playSound(soundIndex) {
         setTimeout(function () {
             try {
                 if (audio && audible) {
-                    currentSecond = audio.currentTime = second * 2;
+                    currentSecond = audio.currentTime = soundIndex * 2;
                     if (currentSecond > 0) audio.currentTime -= .05;
                     setTimeout(function () { audio.play() }, 10);
                 }
@@ -60,27 +63,18 @@ function HitTheDiamond(selector) {
         e.preventDefault();
     });
 
-    function Gem(name, score, img, hitImg, soundsec) {
+    function Gem(name, score, img, hitImg, soundIndex) {
         img = img || score;
         score = parseInt(score) || 0;
         var safename = name.replace(/[^A-Z0-9]/ig, '');
         this.name = name;
         this.img = img;
         this.hitImg = hitImg || img;
-        this.soundsec = soundsec || 0;
         this.score = score;
         this.toString = function () { return safename; };
         this.hits = 0;
         this.playSound = function () {
-            return playSound(this.soundsec);
-            /*if (!audible) return;
-            var snd = audio.cloneNode(true);
-            snd.currentTime = this.soundsec * 2;
-            setTimeout(function () {
-                snd.pause();
-                delete snd;
-            }, 1000);
-            snd.play();*/
+            return playSound(soundIndex || 0);
         }
     }
     var gems = [

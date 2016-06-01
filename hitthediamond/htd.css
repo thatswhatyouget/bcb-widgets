@@ -83,7 +83,8 @@
     
         .bcb-hit-the-diamond .stars > span:after {
             margin:0 .1em;
-            content:"\f005"
+            content:"\f005";
+            transition: opacity .2s ease-in-out;
         }
         
         .bcb-hit-the-diamond .stars > span.used:after {
@@ -240,17 +241,17 @@
     }
     
     .bcb-hit-the-diamond.running .eyepod,  .bcb-hit-the-diamond.over .eyepod {
-        display:block;   
+        display:block;
     }
 
         .bcb-hit-the-diamond .eyepod:nth-of-type(3n+0) {
-            left:20%;   
+            left:20%;
         }
         .bcb-hit-the-diamond .eyepod:nth-of-type(3n+1) {
-            left:50%;   
+            left:80%;
         }
         .bcb-hit-the-diamond .eyepod:nth-of-type(3n+2) {
-            left:80%;   
+            left:50%;
         }
         .bcb-hit-the-diamond .eyepod + .eyepod + .eyepod + .eyepod {
             top:70%;
