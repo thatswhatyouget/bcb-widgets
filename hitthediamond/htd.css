@@ -152,8 +152,9 @@
             color:white;
             font-weight: bold;
             float:right;
-            padding:0 .5em;
+            padding:.05em .5em;
             font-size: 1.25em;
+            line-height: 1em!important;
             text-transform: uppercase;
             border-radius: 1em;
             cursor: pointer;
@@ -167,7 +168,7 @@
                 font-family: FontAwesome;
                 content: "\f04b";
                 position: relative;
-                top:-.25em;
+                top:-.1em;
                 font-size:.7em;
                 left:.25em;  
             }
