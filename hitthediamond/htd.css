@@ -369,11 +369,16 @@
 	text-shadow: none;
 }
 
-
 .bcb-hit-the-diamond button:ACTIVE
 {
 	border-style:inset;
 	box-shadow: none;		
+}
+
+/*Prevent clickTrap from covering the game window*/
+.blogger-clickTrap {
+    display:none!important;
+    pointer-events:none!important;   
 }
 
 /*Browser Compatibility*/
