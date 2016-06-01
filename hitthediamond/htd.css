@@ -131,14 +131,19 @@
         
         .bcb-hit-the-diamond .muteButton:after, .bcb-hit-the-diamond .muteMusic:after {
             position: absolute;
-            left:.05em;
+            left:.1em;
             color:red;
+            font-weight: lighter;
             content: "\f05e";
             transform:rotateY(180deg); 
         }
         
             .bcb-hit-the-diamond.unmuted .muteButton:after, .bcb-hit-the-diamond.musicOn .muteMusic:after{
                 content:'';   
+            }
+            
+            .bcb-hit-the-diamond .muteButton:after {
+                left:-.15em;   
             }
     
     .bcb-hit-the-diamond .dialog {
