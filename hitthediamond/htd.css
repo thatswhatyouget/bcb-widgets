@@ -129,7 +129,7 @@
             content: "\f001";   
         }
         
-        .bcb-hit-the-diamond .muteMusic:after {
+        .bcb-hit-the-diamond .muteButton:after, .bcb-hit-the-diamond .muteMusic:after {
             position: absolute;
             left:.05em;
             color:red;
@@ -137,7 +137,7 @@
             transform:rotateY(180deg); 
         }
         
-            .bcb-hit-the-diamond.musicOn .muteMusic:after {
+            .bcb-hit-the-diamond.unmuted .muteButton:after, .bcb-hit-the-diamond.musicOn .muteMusic:after{
                 content:'';   
             }
     
