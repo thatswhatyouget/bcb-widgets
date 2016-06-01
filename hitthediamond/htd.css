@@ -215,12 +215,8 @@
                 display: inline-block;
                 min-width:40%;
                 text-align: right;
+                margin-right:1em;
             }
-            
-                .bcb-hit-the-diamond .credits > li > span:first-child:after {
-                    margin-right:1em;
-                    content:':';
-                }
         
         .bcb-hit-the-diamond .instructions {
             margin:0;

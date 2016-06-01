@@ -249,11 +249,13 @@ function HitTheDiamond(selector) {
         { credit: "Art, Sound", by: "Steven Universe", link: "http://www.cartoonnetwork.com/video/steven-universe/" },
         { credit: "Music", by: "Aivi & Surasshu", link: "https://soundcloud.com/aivisura/steven-universe-futurisms" },
         { credit: "Testing", by: "Emerald", link: "https://twitter.com/gaygemgoddess" },
+        { by: "Mynder", link: "http://mynder.deviantart.com/" },
+        { by: "Calpain", link: "https://twitter.com/CalpainEqD" },
         { credit: "Crewniverse Font", by: "MaxiGamer", link: "http://fav.me/d8xkpe8" },
         { credit: "Yellow Pearl Vector", by: "Deco-kun", link: "http://steven-universe.wikia.com/wiki/User:Deco-kun" },
         { credit: "Special Thanks", by: "Steven Universe Wiki", link: "http://steven-universe.wikia.com/" }
     ].map(function (c) {
-        return $("<li>").append($("<span>").text(c.credit)).append($(c.link ? "<a target='_blank' href='" + c.link + "'>" : "<span>").text(c.by));
+        return $("<li>").append($("<span>").text(c.credit ? c.credit + ':' : "")).append($(c.link ? "<a target='_blank' href='" + c.link + "'>" : "<span>").text(c.by));
     })));
 
     var preLoad = $.when.apply($, [].concat.apply(gems.map(function (gem) {
