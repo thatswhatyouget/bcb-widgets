@@ -19,9 +19,9 @@ function HitTheDiamond(selector) {
             return $("<source>").attr(snd);
         })).on('timeupdate', function () {
             if (Math.floor(audio.currentTime) > Math.floor(currentSecond)) {
-                //audio.pause();
+                audio.pause();
             }
-        }).on('load canplaythrough progress', function () {
+        }).on('load canplaythrough', function () {
             if ($game.find('.muteButton').is('*')) return;
             audible = window.localStorage.getItem("htd-sounds") == "unmuted";
             $game.toggleClass('unmuted', audible);
