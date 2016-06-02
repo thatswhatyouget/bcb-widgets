@@ -21,7 +21,7 @@ function HitTheDiamond(selector) {
             if (Math.floor(audio.currentTime) > Math.floor(currentSecond)) {
                 audio.pause();
             }
-        }).on('load canplaythrough', function () {
+        }).on('load canplaythrough progress', function () {
             if ($game.find('.muteButton').is('*')) return;
             audible = window.localStorage.getItem("htd-sounds") == "unmuted";
             $game.toggleClass('unmuted', audible);
@@ -154,16 +154,12 @@ function HitTheDiamond(selector) {
             waitForPromise.then(function () {
                 $loading.replaceWith($('<button type="button">').addClass("yes").html(yesText).click(function () {
                     deferred.resolve(yesText);
-                    initMusic(); //in click handler for iOS
-                    initSound(); //in click handler for iOS
                 }));
             });
         }
         if (noText) {
             $dialog.append($('<button type="button">').addClass("no").html(noText).click(function () {
                 deferred.reject(noText);
-                initMusic(); //in click handler for iOS
-                initSound(); //in click handler for iOS
             }));
         }
         var promise = deferred.promise();
@@ -316,10 +312,11 @@ function HitTheDiamond(selector) {
 
     if (typeof (requestAnimationFrame) === "function") {
         Intro();
-        initMusic();
-        initSound();
     }
     else {
         Dialog("Sorry, it looks like this game might not support your web browser. If at all possible, please consider <a href='https://browser-update.org/update.html' target='_blank'>updating</a> your browser.", "Try to Play Anyway", "Dismiss").then(Intro);
     }
+
+    initMusic();
+    initSound();
 }
