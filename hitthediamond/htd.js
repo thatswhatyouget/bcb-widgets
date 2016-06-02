@@ -7,32 +7,32 @@ function HitTheDiamond(selector) {
 
     var score = 0, highscore = parseInt(window.localStorage.getItem('htd-highscore') || '0'), fails = 0;
 
-    var audible = false, currentSecond = 0, audio = $("<audio preload='auto'>").append([
-        { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.ogg", type: "audio/ogg" },
-        { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp4", type: "audio/mp4" },
-        { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp3", type: "audio/mp3" }
-    ].map(function (snd) {
-        return $("<source>").attr(snd);
-    })).on('timeupdate', function () {
-        if (Math.floor(audio.currentTime) > Math.floor(currentSecond)) {
-            audio.pause();
-        }
-    }).on('load canplaythrough', function () {
-        if ($game.find('.muteButton').is('*')) return;
-        audible = window.localStorage.getItem("htd-sounds") == "unmuted";
-        $game.toggleClass('unmuted', audible);
-        $("<div class='muteButton'>").click(function () {
-            audible = !audible;
-            $game.toggleClass('unmuted', audible);
-            window.localStorage.setItem("htd-sounds", audible ? "unmuted" : "muted");
-            startStopMusic();
-        }).prependTo($game);
-    }).appendTo($game).get()[0];
+    var audible = false, currentSecond = 0, audio = null;
 
-    setTimeout(function () {
-        if (audio)
-            $(audio).trigger('canplaythrough');
-    }, 100);
+    function initSound() {
+        if ($game.find('.muteButton').is('*')) return;
+        audio = $("<audio preload='auto'>").append([
+            { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.ogg", type: "audio/ogg" },
+            { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp4", type: "audio/mp4" },
+            { src: "https://thatswhatyouget.github.io/bcb-widgets/hitthediamond/snd/gems.mp3", type: "audio/mp3" }
+        ].map(function (snd) {
+            return $("<source>").attr(snd);
+        })).on('timeupdate', function () {
+            if (Math.floor(audio.currentTime) > Math.floor(currentSecond)) {
+                audio.pause();
+            }
+        }).on('load canplaythrough', function () {
+            if ($game.find('.muteButton').is('*')) return;
+            audible = window.localStorage.getItem("htd-sounds") == "unmuted";
+            $game.toggleClass('unmuted', audible);
+            $("<div class='muteButton'>").click(function () {
+                audible = !audible;
+                $game.toggleClass('unmuted', audible);
+                window.localStorage.setItem("htd-sounds", audible ? "unmuted" : "muted");
+                startStopMusic();
+            }).prependTo($game);
+        }).appendTo($game).get()[0];
+    }
 
     function playSound(soundIndex) {
         setTimeout(function () {
@@ -49,30 +49,33 @@ function HitTheDiamond(selector) {
         }, 10);
     }
 
-    try {
-        if (!music && typeof (SC) !== "undefined" && SC && SC.stream) {
-            SC.initialize({ client_id: "7ffb233b30724e7fde869307d0d5130c" });
-            SC.stream('/tracks/266892129').then(function (player) {
-                music = player;
-                player.setVolume(.5);
-                player.on('finish', function () {
-                    player.seek(0);
-                    player.play();
-                });
-                if ($game.find('.muteMusic').is('*')) return;
-                musicOn = window.localStorage.getItem("htd-music") == "unmuted";
-                $game.toggleClass('musicOn', musicOn);
-                $("<div class='muteMusic'>").click(function () {
-                    musicOn = !musicOn;
+    function initMusic() {
+        if ($game.find('.muteMusic').is('*')) return;
+        try {
+            if (!music && typeof (SC) !== "undefined" && SC && SC.stream) {
+                SC.initialize({ client_id: "7ffb233b30724e7fde869307d0d5130c" });
+                SC.stream('/tracks/266892129').then(function (player) {
+                    music = player;
+                    player.setVolume(.5);
+                    player.on('finish', function () {
+                        player.seek(0);
+                        player.play();
+                    });
+                    if ($game.find('.muteMusic').is('*')) return;
+                    musicOn = window.localStorage.getItem("htd-music") == "unmuted";
                     $game.toggleClass('musicOn', musicOn);
-                    window.localStorage.setItem("htd-music", musicOn ? "unmuted" : "muted");
-                    startStopMusic();
-                }).appendTo($game);
-            });
+                    $("<div class='muteMusic'>").click(function () {
+                        musicOn = !musicOn;
+                        $game.toggleClass('musicOn', musicOn);
+                        window.localStorage.setItem("htd-music", musicOn ? "unmuted" : "muted");
+                        startStopMusic();
+                    }).appendTo($game);
+                });
+            }
         }
-    }
-    catch (e) {
-        console.error(e);
+        catch (e) {
+            console.error(e);
+        }
     }
 
     function startStopMusic(reset) {
@@ -151,12 +154,16 @@ function HitTheDiamond(selector) {
             waitForPromise.then(function () {
                 $loading.replaceWith($('<button type="button">').addClass("yes").html(yesText).click(function () {
                     deferred.resolve(yesText);
+                    initMusic(); //in click handler for iOS
+                    initSound(); //in click handler for iOS
                 }));
             });
         }
         if (noText) {
             $dialog.append($('<button type="button">').addClass("no").html(noText).click(function () {
                 deferred.reject(noText);
+                initMusic(); //in click handler for iOS
+                initSound(); //in click handler for iOS
             }));
         }
         var promise = deferred.promise();
@@ -309,29 +316,10 @@ function HitTheDiamond(selector) {
 
     if (typeof (requestAnimationFrame) === "function") {
         Intro();
+        initMusic();
+        initSound();
     }
     else {
         Dialog("Sorry, it looks like this game might not support your web browser. If at all possible, please consider <a href='https://browser-update.org/update.html' target='_blank'>updating</a> your browser.", "Try to Play Anyway", "Dismiss").then(Intro);
     }
 }
-
-//quick shims for oldnbusted browsers
-Array.prototype.map = Array.prototype.map || function (func) {
-    var output = [];
-    for (var i = 0; i < this.length; i++) {
-        output.push(func(this[i], i, this));
-    }
-    return output;
-};
-Array.prototype.filter = Array.prototype.filter || function (func) {
-    var output = [];
-    for (var i = 0; i < this.length; i++) {
-        if (func(this[i], i, this))
-            output.push(this[i]);
-    }
-    return output;
-};
-Array.prototype.forEach = Array.prototype.forEach || function (func) {
-    this.map(func);
-};
-Array.prototype.sort = Array.prototype.sort || function () { return this; };
