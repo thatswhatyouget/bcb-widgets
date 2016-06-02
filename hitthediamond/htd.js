@@ -17,7 +17,7 @@ function HitTheDiamond(selector) {
         if (Math.floor(audio.currentTime) > Math.floor(currentSecond)) {
             audio.pause();
         }
-    }).on('canplaythrough', function () {
+    }).on('load canplaythrough', function () {
         if ($game.find('.muteButton').is('*')) return;
         audible = window.localStorage.getItem("htd-sounds") == "unmuted";
         $game.toggleClass('unmuted', audible);
@@ -28,6 +28,12 @@ function HitTheDiamond(selector) {
             startStopMusic();
         }).prependTo($game);
     }).appendTo($game).get()[0];
+
+    setTimeout(function () {
+        if (audio && audio.readyState && audio.readyState >= 3) {
+            $(audio).trigger('canplaythrough');
+        }
+    }, 100);
 
     function playSound(soundIndex) {
         setTimeout(function () {
@@ -49,7 +55,7 @@ function HitTheDiamond(selector) {
             SC.initialize({ client_id: "7ffb233b30724e7fde869307d0d5130c" });
             SC.stream('/tracks/266892129').then(function (player) {
                 music = player;
-                player.setVolume(.25);
+                player.setVolume(.5);
                 player.on('finish', function () {
                     player.seek(0);
                     player.play();
@@ -74,8 +80,10 @@ function HitTheDiamond(selector) {
         if (music && music.play && music.pause) {
             if (reset)
                 music.seek(0);
-            if ($game.is('.running') && musicOn)
+            if ($game.is('.running') && musicOn) {
                 music.play();
+                setTimeout(function () { music.play(); }, 100); //in case it didn't hear me
+            }
             else
                 music.pause();
         }
