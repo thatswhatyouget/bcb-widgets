@@ -12,7 +12,7 @@
     -ms-user-select: none;
     -webkit-user-select: none;
     font-size:16px;
-    touch-action:none;
+    touch-action: manipulation;
 }
 
     .bcb-hit-the-diamond.running {
