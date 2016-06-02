@@ -30,9 +30,8 @@ function HitTheDiamond(selector) {
     }).appendTo($game).get()[0];
 
     setTimeout(function () {
-        if (audio && audio.readyState && audio.readyState >= 3) {
+        if (audio)
             $(audio).trigger('canplaythrough');
-        }
     }, 100);
 
     function playSound(soundIndex) {
