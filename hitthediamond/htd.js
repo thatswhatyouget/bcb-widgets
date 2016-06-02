@@ -19,7 +19,7 @@ function HitTheDiamond(selector) {
             return $("<source>").attr(snd);
         })).on('timeupdate', function () {
             if (Math.floor(audio.currentTime) > Math.floor(currentSecond)) {
-                audio.pause();
+                //audio.pause();
             }
         }).on('load canplaythrough progress', function () {
             if ($game.find('.muteButton').is('*')) return;
