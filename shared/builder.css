@@ -44,7 +44,10 @@ section input, section textarea {
     vertical-align: top;
 }
 
+section.html textarea, section.html input {
+    width:80%;
+}
+
 section.html textarea {
-    width: 80%;
     height: 200px;
 }
