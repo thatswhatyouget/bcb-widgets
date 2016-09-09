@@ -26,9 +26,11 @@ angular.module('artApp', [])
         }
         artPost.Add = function () {
             if (!artPost.nextSource) return;
-            artPost.nextSource.split('\n').forEach(function (artSrc) {
+            var artLength = artPost.art.length;
+            artPost.nextSource.split('\n').map(function (artSrc, i) {
+                artPost.art.push(new Art(artSrc));
                 Art.findAt(artSrc).then(function (art) {
-                    artPost.art.push(art);
+                    artPost.art[artLength + i] = art;
                     $scope.$apply();
                     Save();
                 });
