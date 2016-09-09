@@ -26,11 +26,13 @@ angular.module('artApp', [])
         }
         artPost.Add = function () {
             if (!artPost.nextSource) return;
-            Art.findAt(artPost.nextSource).then(function (art) {
-                artPost.art.push(art);
-                $scope.$apply();
-                Save();
-            });
+            artPost.nextSource.split('\n').forEach(function (artSrc) {
+                Art.findAt(artSrc).then(function (art) {
+                    artPost.art.push(art);
+                    $scope.$apply();
+                    Save();
+                });
+            });    
             artPost.nextSource = '';
         }
         artPost.Remove = function (index) {
