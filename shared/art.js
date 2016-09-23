@@ -49,7 +49,7 @@ Art.findAt = function (link) {
             timeout: 1000
         }).then(function (r) { return r; }, function (e) {
             return $.ajax({
-                url: "http://cors.io/?u=" + encodeURI(link),
+                url: "http://cors.io/?" + encodeURI(link),
                 type: "GET",
                 dataType: "text",
                 timeout: 1000
