@@ -98,13 +98,13 @@
     </section>
     <section class="html">
         <h3>HTML</h3>
-        <textarea id="html">{{fanficPost.outputHtml()}}</textarea>
+        <pre id="html">{{fanficPost.outputHtml()}}</pre>
         <br/>
         <button class="clipboard" data-clipboard-target="#html">Copy to Clipboard</button>
     </section>
     <section class="html">
         <h3>Tags</h3>
-        <input id="tags" ng-value="fanficPost.getTags()" />
+        <pre id="tags">{{fanficPost.getTags()}}</pre>
         <br/>
         <button class="clipboard" data-clipboard-target="#tags">Copy to Clipboard</button>
     </section>

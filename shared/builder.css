@@ -48,6 +48,16 @@ section.html textarea, section.html input {
     width:80%;
 }
 
-section.html textarea {
-    height: 200px;
+section.html pre {
+    width:500px;
+    min-height: 1em;
+    max-height: 200px;
+    overflow: auto;
+    margin:auto;
+    font-family: monospace;
+    font-size:.5em;
+    text-align: left;
+    border: 1px solid #333;
+    color:#666;
+    padding:.2em;
 }
