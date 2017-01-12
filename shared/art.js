@@ -18,34 +18,14 @@ function Art(source, image, caption) {
 
 Art.findAt = function (link) {
     var deferred = $.Deferred();
-    //get open graph tags
-    $.ajax({
-        url: "http://opengraph.io/api/1.0/site/" + encodeURI(link),
-        type: "GET",
-        dataType: "json",
-        timeout: 1000
-    }).then(function (data) {
-        try {
-            if (data.openGraph.error) throw new Error(data.openGraph.error);
-            if (data.openGraph.type == "tumblr-feed:photoset") throw new Error("Photosets must be scraped manually to get all images");
-            if (data.openGraph.site_name == "Twitter") throw new Error("Twitter might contain a photoset.");
-            if (data.openGraph.site_name == "Imgur") { //replace thumbnail image with correct image(s) detected on page
-                var validImage = /i\.imgur\.com/;
-                data.openGraph.image = data.htmlInferred.images.filter(function (i) { return validImage.test(i) });
-            }
-            deferred.resolve(new Art(link, data.openGraph.image, data.openGraph.title || data.openGraph.description));
-        }
-        catch (e) {
-            var fail = $.Deferred();
-            fail.reject(e);
-            return fail;
-        }
-    }).fail(function () {
+    function manualScrape() {
         //manually try to scrape open graph tags
         scrape(link).then(function (page) {
             var doc = document.implementation.createHTMLDocument(), image = [], caption = '';
             doc.documentElement.innerHTML = page;
+            console.log(page);
             [].concat.apply([], doc.getElementsByTagName("meta")).forEach(function (meta) {
+                console.log(meta);
                 switch (meta.getAttribute("property")) {
                     case "og:image":
                         return image.push(meta.getAttribute("content"));
@@ -57,37 +37,65 @@ Art.findAt = function (link) {
         }, function () {
             deferred.resolve(new Art(link));
         });
-    });
+    }
+    //get open graph tags
+    if (typeof appScraper === "function") {
+        manualScrape();
+    }
+    else {
+        $.ajax({
+            url: "http://opengraph.io/api/1.0/site/" + encodeURI(link),
+            type: "GET",
+            dataType: "json",
+            timeout: 1000
+        }).then(function (data) {
+            try {
+                if (data.openGraph.error) throw new Error(data.openGraph.error);
+                if (data.openGraph.type == "tumblr-feed:photoset") throw new Error("Photosets must be scraped manually to get all images");
+                if (data.openGraph.site_name == "Twitter") throw new Error("Twitter might contain a photoset.");
+                if (data.openGraph.site_name == "Imgur") { //replace thumbnail image with correct image(s) detected on page
+                    var validImage = /i\.imgur\.com/;
+                    data.openGraph.image = data.htmlInferred.images.filter(function (i) { return validImage.test(i) });
+                }
+                deferred.resolve(new Art(link, data.openGraph.image, data.openGraph.title || data.openGraph.description));
+            }
+            catch (e) {
+                var fail = $.Deferred();
+                fail.reject(e);
+                return fail;
+            }
+        }).fail(manualScrape);
+    }
     setTimeout(function () { deferred.resolve(new Art(link)) }, 2000);
     return deferred.promise();
 }
 
 Art.bcbSizing = function () {
-        function link(scope, element, attrs) {
-            var dimension = attrs.bcbSizing || 400;
-            var force = attrs.bcbSizingForce;
-            var $img = $(element);
-            function fixImage() {
-                var width = $img[0].naturalWidth || $img.width(), height = $img[0].naturaHeight || $img.height(), ratio = width / height;
-                if (height < dimension && width < dimension && !force);
-                else if (height > width) {
-                    height = dimension;
-                    width = height * ratio;
-                }
-                else {
-                    width = dimension;
-                    height = width / ratio;
-                }
-                $img.attr("width", Math.floor(width));
+    function link(scope, element, attrs) {
+        var dimension = attrs.bcbSizing || 400;
+        var force = attrs.bcbSizingForce;
+        var $img = $(element);
+        function fixImage() {
+            var width = $img[0].naturalWidth || $img.width(), height = $img[0].naturaHeight || $img.height(), ratio = width / height;
+            if (height < dimension && width < dimension && !force);
+            else if (height > width) {
+                height = dimension;
+                width = height * ratio;
             }
-            $img.on('load', fixImage);
-            if ($img[0].complete) fixImage();
+            else {
+                width = dimension;
+                height = width / ratio;
+            }
+            $img.attr("width", Math.floor(width));
         }
-
-        return {
-            link: link
-        };
+        $img.on('load', fixImage);
+        if ($img[0].complete) fixImage();
     }
+
+    return {
+        link: link
+    };
+}
 
 function scrape(link) {
     if (typeof appScraper === "function") {
@@ -112,4 +120,4 @@ var appScraper = null;
 try {
     appScraper = require('electron').remote.require('./scraper.js').scrape;
 }
-catch (e) {}
+catch (e) { }
