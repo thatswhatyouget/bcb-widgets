@@ -23,10 +23,10 @@ Art.findAt = function (link) {
         scrape(link).then(function (page) {
             var doc = document.implementation.createHTMLDocument(), image = [], caption = '';
             doc.documentElement.innerHTML = page;
-            console.log(page);
+            //console.log(page);
             var ogImageFound = false;
             [].concat.apply([], doc.getElementsByTagName("meta")).forEach(function (meta) {
-                console.log(meta);
+                //console.log(meta);
                 switch (meta.getAttribute("property") || meta.getAttribute("name")) {
                     case "og:image": //primary image source
                         if (!ogImageFound) image = [];
