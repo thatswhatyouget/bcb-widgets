@@ -24,13 +24,21 @@ Art.findAt = function (link) {
             var doc = document.implementation.createHTMLDocument(), image = [], caption = '';
             doc.documentElement.innerHTML = page;
             console.log(page);
+            var ogImageFound = false;
             [].concat.apply([], doc.getElementsByTagName("meta")).forEach(function (meta) {
                 console.log(meta);
-                switch (meta.getAttribute("property")) {
-                    case "og:image":
+                switch (meta.getAttribute("property") || meta.getAttribute("name")) {
+                    case "og:image": //primary image source
+                        if (!ogImageFound) image = [];
+                        ogImageFound = true;
                         return image.push(meta.getAttribute("content"));
+                    case "twitter:image": //fallback image source
+                        if (ogImageFound) return;
+                        return image.push(meta.getAttribute("content"));    
                     case "og:description":
-                        return caption = $('<div>').html(meta.getAttribute("content")).text();
+                    case "description":
+                    case "twitter:description":
+                        return caption = $('<div>').html(meta.getAttribute("content")).text().trim();
                 }
             });
             deferred.resolve(new Art(link, image, caption));
