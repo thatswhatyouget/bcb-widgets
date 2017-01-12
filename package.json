@@ -1,0 +1,21 @@
+{
+  "name": "bcb-widgets",
+  "version": "1.0.0",
+  "description": "Collection of widgets and post builders for Beach City Bugle",
+  "main": "app-src/shell.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thatswhatyouget/bcb-widgets.git"
+  },
+  "author": "Beach City Bugle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thatswhatyouget/bcb-widgets/issues"
+  },
+  "homepage": "https://github.com/thatswhatyouget/bcb-widgets#readme",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-electron": "^0.1.3"
+  }
+}

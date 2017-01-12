@@ -1,0 +1,20 @@
+{
+  "name": "bcb-builder",
+  "version": "1.0.0",
+  "description": "BCB's Post Builder app",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thatswhatyouget/bcb-widgets.git"
+  },
+  "author": "Beach City Bugle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thatswhatyouget/bcb-widgets/issues"
+  },
+  "homepage": "https://github.com/thatswhatyouget/bcb-widgets#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-electron": "^0.1.3"
+  }
+}

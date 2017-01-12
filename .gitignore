@@ -1,2 +1,12 @@
 #OS files
 .DS_Store
+
+#npm
+npm-debug.log
+node_modules/
+
+#electron build files
+cache/
+app/**/darwin-x64
+app/**/linux-x64
+app/**/win32-x64
