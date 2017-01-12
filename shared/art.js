@@ -42,19 +42,7 @@ Art.findAt = function (link) {
         }
     }).fail(function () {
         //manually try to scrape open graph tags
-        $.ajax({
-            url: "http://crossorigin.me/" + encodeURI(link),
-            type: "GET",
-            dataType: "text",
-            timeout: 1000
-        }).then(function (r) { return r; }, function (e) {
-            return $.ajax({
-                url: "http://cors.io/?" + encodeURI(link),
-                type: "GET",
-                dataType: "text",
-                timeout: 1000
-            });
-        }).then(function (page) {
+        scrape(link).then(function (page) {
             var doc = document.implementation.createHTMLDocument(), image = [], caption = '';
             doc.documentElement.innerHTML = page;
             [].concat.apply([], doc.getElementsByTagName("meta")).forEach(function (meta) {
@@ -100,3 +88,28 @@ Art.bcbSizing = function () {
             link: link
         };
     }
+
+function scrape(link) {
+    if (typeof appScraper === "function") {
+        return appScraper(link);
+    }
+    return $.ajax({
+        url: "http://crossorigin.me/" + link,
+        type: "GET",
+        dataType: "text",
+        timeout: 1000
+    }).then(function (r) { return r; }, function (e) {
+        return $.ajax({
+            url: "http://cors.io/?u=" + link,
+            type: "GET",
+            dataType: "text",
+            timeout: 1000
+        });
+    });
+}
+
+var appScraper = null;
+try {
+    appScraper = require('electron').remote.require('./scraper.js').scrape;
+}
+catch (e) {}
