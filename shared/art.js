@@ -42,7 +42,8 @@ Art.findAt = function (link) {
                 }
             });
             deferred.resolve(new Art(link, image, caption));
-        }, function () {
+        }, function (err) {
+            console.error(err);
             deferred.resolve(new Art(link));
         });
     }
