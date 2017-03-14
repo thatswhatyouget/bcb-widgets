@@ -1,0 +1,33 @@
+<html ng-app="videoApp">
+
+<head>
+    <title>Beach City Bugle Video Post Builder</title>
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../shared/droplink.js"></script>
+    <script src="contest.js"></script>
+    <link rel="stylesheet" href="../shared/builder.css" type="text/css" />
+    <script>if (window.module) module = window.module;</script>
+</head>
+
+<body>
+    <section class="construct">
+        <h3>Build</h3>
+        <div>
+            <label>Participants:</label>
+            <textarea class="participants" rows="5" placeholder="Paste in participants one per line"></textarea>
+            <br/>
+            <label>Number of Winners:</label>
+            <input type="number" class="numWinners" value="1" min="1" />
+            <br/>
+            <button class="doit">Pick Winners</button>
+        </div>
+    </section>
+    <section class="output">
+        <h3>Winners</h3>
+        <div style="text-align: center;" class="winnersCircle">
+        </div>
+    </section>
+</body>
+
+</html>
