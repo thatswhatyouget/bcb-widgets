@@ -100,4 +100,5 @@ a[href='/search/label/Drawing Things Out'] {
 a[href='/search/label/Drawing Things Out']:before {
     font-size:14.8px;
     content:'We Draw Bears';
+    line-height:2.2em;
 }
