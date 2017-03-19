@@ -102,3 +102,6 @@ a[href='/search/label/Drawing Things Out']:before {
     content:'We Draw Bears';
     line-height:2.2em;
 }
+
+.bcbCountdown::before { background-image: url("icebear.jpg")!important; }
+.bcbCountdown::after { content:"Ice Bear is Excited"!important }

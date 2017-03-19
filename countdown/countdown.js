@@ -134,6 +134,5 @@ function bcbCountdown(element, config, theme) {
     var d = new Date();
     if (d.getMonth() == 3 && d.getDate() == 1) {
         setTimeout(function () { sneaky(3); }, 60000 * Math.random());
-        if (d.getFullYear() == 2017) bears(3);    
     }
 }
