@@ -114,13 +114,13 @@ function scrape(link) {
         url: "http://crossorigin.me/" + link,
         type: "GET",
         dataType: "text",
-        timeout: 1000
+        timeout: 5000
     }).then(function (r) { return r; }, function (e) {
         return $.ajax({
             url: "http://cors.io/?u=" + link,
             type: "GET",
             dataType: "text",
-            timeout: 1000
+            timeout: 5000
         });
     });
 }
