@@ -22,7 +22,7 @@ body {
     vertical-align: baseline;
 }
 
-.post .post-header a:visited, .post .post-header a:link {
+.post .post-header h3 a:visited, .post .post-header h3 a:link {
     color:#6E3823;
 }
 
@@ -75,4 +75,26 @@ ul.headlines li a {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+#HTML601 h2{
+    font-size:0;
+}
+
+#HTML601 h2:before{
+    content:'We Blog Bears';
+    font-size:20px;
+}
+
+.foot a, .foot h2 {
+    color:#6E3823!important;  
+}
+
+a[href='/search/label/Drawing Things Out'] {
+    font-size:0;
+}
+
+a[href='/search/label/Drawing Things Out']:before {
+    font-size:14.8px;
+    content:'We Draw Bears';
 }
