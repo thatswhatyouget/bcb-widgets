@@ -1,0 +1,78 @@
+/* Import We Bare Bears font */
+@font-face {
+    font-family: 'We Bare Bears';
+    font-style: normal;
+    font-weight: normal;
+    src: local(‚ò∫), local('We Bare Bears'), url(https://dl.dropbox.com/s/ashuug7oc1zqcau/We%20Bare%20Bears.ttf) format('truetype');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+body {  
+    background-color:#EED9C5!important;
+}
+
+.foot, .nav-bar {
+    background-color: #B68C52!important;
+    color:#6E3823!important;
+} 
+
+.post .post-header {
+    font-family: We Bare Bears!important;
+    font-size:1.5em;
+    vertical-align: baseline;
+}
+
+.post .post-header a:visited, .post .post-header a:link {
+    color:#6E3823;
+}
+
+a.nav-bar-button {
+    font-family: We Bare Bears!important;
+    color:#6E3823!important;
+    font-size:1.5em;
+    vertical-align: baseline;
+    text-shadow: 1px 1px rgba(255,255,255,0.3)!important;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.40) 100%)!important;
+}
+
+a.nav-bar-button:HOVER, .nav-bar .drop-down.hover a.nav-bar-button {
+    background-color: rgba(255,255,255,0.5)!important;
+    box-shadow: 0px 0px 10px rgba(255,255,255,0.2) inset!important;
+}
+
+.nav-bar .widget {
+    border-left: 1px solid rgba(255,255,255,0.05)!important;
+    border-right: 1px solid rgba(255,255,255,0.3)!important;
+}
+
+ul.headlines li {
+    background-color: rgba(255,255,255,255.5)!important;
+}
+
+ul.headlines li a {
+    color:#6E3823!important;
+    font-family: We Bare Bears!important;
+    font-size:1.5em;
+    vertical-align: baseline;
+}
+
+.module h1 {
+    background: #B68C52!important;
+    font-family: We Bare Bears!important;
+}
+
+#header-bg-1,#header-bg-2,#header-bg-3,#header-bg-4 {
+    background-image:url("http://i.imgur.com/R0w8WjO.jpg")!important;
+    background-size:cover;
+}
+
+#header-bg-4 a img {
+    width:0;
+    height:0;
+    padding-left:975px;
+    padding-top:293px;
+    background-image:url("http://i.imgur.com/Ivbkhnw.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
