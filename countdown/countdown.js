@@ -82,7 +82,7 @@ function bcbCountdown(element, config, theme) {
 
     var numBears = 0;  
     function bears(skipNum) {
-        if ((numBears += skipNum) > 3)
+        if ((numBears += skipNum) >= 3)
             $(document.head).append("<link rel='stylesheet' href='//thatswhatyouget.github.io/bcb-widgets/eggs/wbb.css'/>");
     }
 
