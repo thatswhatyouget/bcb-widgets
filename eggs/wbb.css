@@ -45,20 +45,23 @@ a.nav-bar-button:HOVER, .nav-bar .drop-down.hover a.nav-bar-button {
     border-right: 1px solid rgba(255,255,255,0.3)!important;
 }
 
-ul.headlines li {
+ul.headlines li, .feed-links {
     background-color: rgba(255,255,255,255.5)!important;
 }
 
-ul.headlines li a {
+ul.headlines li a, .feed-links, .feed-links a {
     color:#6E3823!important;
     font-family: We Bare Bears!important;
     font-size:1.5em;
     vertical-align: baseline;
 }
 
-.module h1 {
+.module h1, .blog-pager a {
     background: #B68C52!important;
     font-family: We Bare Bears!important;
+    color:#6E3823!important;
+    font-size:1.5em;
+    vertical-align: baseline;
 }
 
 #header-bg-1,#header-bg-2,#header-bg-3,#header-bg-4 {
