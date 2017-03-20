@@ -93,13 +93,20 @@ ul.headlines li a, .feed-links, .feed-links a {
     color:#6E3823!important;  
 }
 
-a[href='/search/label/Drawing Things Out'] {
+a[href='/search/label/Drawing Things Out'], a[href='/search/label/Rebecca Sugar'] {
     font-size:0;
 }
 
 a[href='/search/label/Drawing Things Out']:before {
-    font-size:14.8px;
     content:'We Draw Bears';
+}
+
+a[href='/search/label/Rebecca Sugar']:before {
+    content:'WBB Fan Rebecca Sugar';
+}
+
+.drop-down-menu a:before {
+    font-size:14.8px;
     line-height:2.2em;
 }
 
