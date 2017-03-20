@@ -56,7 +56,7 @@ ul.headlines li a, .feed-links, .feed-links a {
     vertical-align: baseline;
 }
 
-.module h1, .blog-pager a {
+.module h1, div.settings h1, .blog-pager a {
     background: #B68C52!important;
     font-family: We Bare Bears!important;
     color:#6E3823!important;
@@ -80,8 +80,14 @@ ul.headlines li a, .feed-links, .feed-links a {
     background-repeat: no-repeat;
 }
 
-#HTML601 h2{
+#HTML601 h2, div.settings h1, a[href='/search/label/Drawing Things Out'], a[href='/search/label/Rebecca Sugar'] {
     font-size:0;
+}
+
+div.settings h1:before {
+    font-size:25px;
+    font-weight: bold;
+    content:"We Blog Bears Settings";
 }
 
 #HTML601 h2:before{
@@ -91,10 +97,6 @@ ul.headlines li a, .feed-links, .feed-links a {
 
 .foot a, .foot h2 {
     color:#6E3823!important;  
-}
-
-a[href='/search/label/Drawing Things Out'], a[href='/search/label/Rebecca Sugar'] {
-    font-size:0;
 }
 
 a[href='/search/label/Drawing Things Out']:before {
