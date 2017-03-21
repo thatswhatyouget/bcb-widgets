@@ -97,7 +97,7 @@ div.settings h1:before {
     font-size:20px;
 }
 
-.foot a, .foot h2 {
+.foot a, .foot h2, .status-msg-body {
     color:#6E3823!important;  
 }
 
