@@ -1,4 +1,7 @@
 var ytReg = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+var scReg = /soundcloud\.com/i;
+
+var musicLinks = [ytReg, scReg];
 
 function Song(url, $scope, $sce) {
     var me = this;
@@ -13,7 +16,7 @@ function Song(url, $scope, $sce) {
         if (ytReg.test(url)) {
             me.embedHtml = $sce.trustAsHtml('<iframe allowfullscreen="" frameborder="0" height="400" src="' + 'https://www.youtube.com/embed/' + ytReg.exec(me.url)[7] + '" width="640"></iframe>');
         }
-        else if (/soundcloud\.com/i.test(url)) {
+        else if (stReg.test(url)) {
             $.get('https://soundcloud.com/oembed?format=json&url=' + encodeURI(me.url)).then(function (data) {
                 me.embedHtml = $sce.trustAsHtml(data.html);
                 me.title = data.title;
@@ -58,7 +61,7 @@ angular.module('musicApp', [])
             musicPost.songs.splice(index, 1);
         }
         DropLink(function (link) {
-            if (/soundcloud\.com/i.test(link) || ytReg.test(link)) {
+            if (musicLinks.some(l => l.test(link))) {
                 musicPost.url = link;
             }
             else {
