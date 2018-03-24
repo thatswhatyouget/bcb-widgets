@@ -75,7 +75,7 @@ Art.findAt = function (link) {
             }
         }).fail(manualScrape);
     }
-    setTimeout(function () { deferred.resolve(new Art(link)) }, 2000);
+    setTimeout(function () { deferred.resolve(new Art(link)) }, 30000);
     return deferred.promise();
 }
 

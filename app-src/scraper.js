@@ -6,6 +6,7 @@ exports.scrape = function (url) {
                 resolve(body);
             }
             else {
+                console.error(error);
                 reject(response.statusCode + ": " + response.statusMessage);
             }
         })
