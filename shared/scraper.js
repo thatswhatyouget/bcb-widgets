@@ -28,23 +28,19 @@ catch (e) { }
 let $deviantFrameCollection;
 
 function insecureDeviantArtScraper(link) {
-    console.log("Scraping DeviantArt...");
     const $deferred = $.Deferred();
     $deviantFrameCollection = $deviantFrameCollection || $('<div>').appendTo(document.body).css({ position: "fixed", left: 0, top: 0, right: 0, height: 0, overflow: "visible" });
-    const $deviantFrame = $('<iframe sandbox="allow-scripts">').attr('src', link).appendTo($deviantFrameCollection).css({ display: "inline-block", width: "100px", height: "100px" });
+    const $deviantFrame = $('<iframe sandbox="allow-scripts allow-same-origin">').attr('src', link).appendTo($deviantFrameCollection).css({ display: "inline-block", width: "100px", height: "100px" });
     function dumpFrame() {
         if ($deviantFrame.is(':visible')) {
             if (($deviantFrame.contents().find('body').attr('id') || '').indexOf('deviantART') >= 0) {
                 const html = `<html>${$deviantFrame.contents().find("html").html()}</html>`;
-                //console.log(html);
-                //console.log("Found html");
                 $deferred.resolve(html);
                 hideFrame();
             }
         }    
     }
     function hideFrame() {
-        //console.log("Hiding");
         if ($deviantFrame.is(':visible')) {
             $deviantFrame.hide();
             //$deviantFrame.attr('src', 'about:blank').on('load', () => $deviantFrame.hide());
