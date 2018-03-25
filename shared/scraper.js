@@ -30,7 +30,7 @@ let $deviantFrameCollection;
 function insecureDeviantArtScraper(link) {
     const $deferred = $.Deferred();
     $deviantFrameCollection = $deviantFrameCollection || $('<div>').appendTo(document.body).css({ position: "fixed", left: 0, top: 0, right: 0, height: 0, overflow: "visible" });
-    const $deviantFrame = $('<iframe sandbox="allow-scripts allow-same-origin">').attr('src', link).appendTo($deviantFrameCollection).css({ display: "inline-block", width: "100px", height: "100px" });
+    const $deviantFrame = $('<iframe sandbox="">').attr('src', link).appendTo($deviantFrameCollection).css({ display: "inline-block", width: "100px", height: "100px" });
     function dumpFrame() {
         if ($deviantFrame.is(':visible')) {
             if (($deviantFrame.contents().find('body').attr('id') || '').indexOf('deviantART') >= 0) {

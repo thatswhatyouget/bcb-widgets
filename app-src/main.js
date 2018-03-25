@@ -11,17 +11,13 @@ function createWindow() {
   win = new BrowserWindow({
     width: 1024,
     height: 768,
-    webSecurity: false
+    webPreferences: {
+      webSecurity: false
+    }  
   })
 
   // and load the index.html of the app.
-  win.loadURL(url.format({
-    pathname: "thatswhatyouget.github.io/bcb-widgets/",
-    protocol: 'http:',
-    // pathname: "/Users/dave/Projects/bcb-widgets/artpost/index.html", //for testing
-    // protocol: 'file:',
-    slashes: true
-  }))
+  win.loadURL("https://thatswhatyouget.github.io/bcb-widgets/")
 
   // Open the DevTools.
   //win.webContents.openDevTools()
