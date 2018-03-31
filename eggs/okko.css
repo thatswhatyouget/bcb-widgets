@@ -1,9 +1,9 @@
 body {  
-    background-color:#9f4d9f!important;
+    background-color:#c004fc!important;
 }
 
 .foot, .nav-bar {
-    background-color: #6f027c!important;
+    background-color: #6006eb!important;
     color:#35f28c!important;
 } 
 
@@ -13,8 +13,8 @@ body {
 }
 
 .post .post-header h3 a:visited, .post .post-header h3 a:link {
-    color: #ffe80a!important;
-    text-shadow: 2px 2px 0px #f27db1!important;
+    color: #f9fa1b!important;
+    text-shadow: .1em 0 0 #fa69f9, .05em .1em 0 #6006eb!important;
     text-transform: uppercase!important;
 }
 
@@ -22,7 +22,7 @@ a.nav-bar-button {
     color:#35f28c!important;
     font-size:1.5em;
     vertical-align: baseline;
-    text-shadow: 1px 1px rgba(255,255,255,0.3)!important;
+    text-shadow: 1px 1px black!important;
     background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.40) 100%)!important;
 }
 
@@ -38,24 +38,40 @@ a.nav-bar-button:HOVER, .nav-bar .drop-down.hover a.nav-bar-button {
 }
 
 ul.headlines li, .feed-links {
-    background-color: rgba(255,255,255,255.5)!important;
+    background-color: #6006eb!important;
 }
 
 ul.headlines li a, .feed-links, .feed-links a {
     color:#35f28c!important;
-    font-size:1.5em;
     vertical-align: baseline;
 }
 
 .module h1, div.settings h1, .blog-pager a {
-    background: rgba(0,188,271,0.8)!important;
-    font-size:1.5em;
+    background: #3bfbf9!important;
     vertical-align: baseline;
+    color: #f9fa1b!important;
+    text-shadow: .1em 0 0 #fa69f9, .05em .1em 0 #6006eb!important;
+    text-transform: uppercase!important;
+}
+
+.post {
+    border-color: #6f027c;
+    background: #3bfbf9!important;
+}
+.post .post-footer {
+    background-color:rgba(0,0,0,.3);
+    color:white;
+}
+
+.post .post-footer .post-footer-comment a {
+    background-color: #6006eb!important;
+    color: white!important;
 }
 
 #header-bg-1,#header-bg-2,#header-bg-3,#header-bg-4 {
     background-image:url("https://media.discordapp.net/attachments/259431839855411200/419340124388720658/Wiki-background.jpg")!important;
     background-size:cover;
+    background-position: center;
 }
 
 #header-bg-4 a img {
@@ -87,8 +103,8 @@ div.settings h1:before {
 }
 
 .foot a, .foot h2, .status-msg-body {
-    color: #ffe80a!important;
-    text-shadow: 2px 2px 0px #f27db1!important;
+    color: #f9fa1b!important;
+    text-shadow: .1em 0 0 #fa69f9, .05em .1em 0 #6006eb!important;
     text-transform: uppercase!important;
 }
 
