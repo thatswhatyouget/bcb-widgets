@@ -1,0 +1,109 @@
+body {  
+    background-color:#9f4d9f!important;
+}
+
+.foot, .nav-bar {
+    background-color: #6f027c!important;
+    color:#35f28c!important;
+} 
+
+.post .post-header {
+    font-size:1.5em;
+    vertical-align: baseline;
+}
+
+.post .post-header h3 a:visited, .post .post-header h3 a:link {
+    color: #ffe80a!important;
+    text-shadow: 2px 2px 0px #f27db1!important;
+    text-transform: uppercase!important;
+}
+
+a.nav-bar-button {
+    color:#35f28c!important;
+    font-size:1.5em;
+    vertical-align: baseline;
+    text-shadow: 1px 1px rgba(255,255,255,0.3)!important;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.40) 100%)!important;
+}
+
+a.nav-bar-button:HOVER, .nav-bar .drop-down.hover a.nav-bar-button {
+    background-color: #35f28c!important;
+    color: #9f4d9f!important;
+    box-shadow: 0px 0px 10px rgba(255,255,255,0.2) inset!important;
+}
+
+.nav-bar .widget {
+    border-left: 1px solid rgba(255,255,255,0.05)!important;
+    border-right: 1px solid rgba(255,255,255,0.3)!important;
+}
+
+ul.headlines li, .feed-links {
+    background-color: rgba(255,255,255,255.5)!important;
+}
+
+ul.headlines li a, .feed-links, .feed-links a {
+    color:#35f28c!important;
+    font-size:1.5em;
+    vertical-align: baseline;
+}
+
+.module h1, div.settings h1, .blog-pager a {
+    background: rgba(0,188,271,0.8)!important;
+    font-size:1.5em;
+    vertical-align: baseline;
+}
+
+#header-bg-1,#header-bg-2,#header-bg-3,#header-bg-4 {
+    background-image:url("https://media.discordapp.net/attachments/259431839855411200/419340124388720658/Wiki-background.jpg")!important;
+    background-size:cover;
+}
+
+#header-bg-4 a img {
+    width:0;
+    height:0;
+    padding-left:975px;
+    padding-top:293px;
+    background-image:url("https://cdn.discordapp.com/attachments/259431839855411200/422965248786563091/Lets_Blog_Heroes.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 10px;
+}
+
+#HTML601 h2, div.settings h1, a[href='/search/label/Drawing Things Out'], a[href='/search/label/Rebecca Sugar'] {
+    font-size:0;
+}
+
+div.settings h1:before {
+    font-size:25px;
+    font-weight: bold;
+    content:"Let's Blog Heroes Settings";
+}
+
+#HTML601 h2:before{
+    content:"Let's Blog Heroes";
+    font-size:20px;
+}
+
+.foot a, .foot h2, .status-msg-body {
+    color: #ffe80a!important;
+    text-shadow: 2px 2px 0px #f27db1!important;
+    text-transform: uppercase!important;
+}
+
+a[href='/search/label/Drawing Things Out']:before {
+    content:"Let's Draw Heroes";
+}
+
+a[href='/search/label/Rebecca Sugar']:before {
+    content:'Songwriter Rebecca Sugar';
+}
+
+.drop-down-menu a:before {
+    font-size:14.8px;
+    line-height:2.2em;
+}
+
+.bcbCountdown::before { background-image: url("icebear.jpg")!important; }
+.bcbCountdown::after { content:"Ice Bear is Excited"!important }
