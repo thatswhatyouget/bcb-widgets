@@ -69,7 +69,7 @@ function bcbCountdown(element, config, theme) {
                 if (pressed.join('') == "SUGAR") unlocked = true;
                 if (pressed.join('') == "RIDOT") sneaky(1);
                 if (pressed.join('') == "BEARS") bears(1);
-                if (pressed.join('').length > 4 ? pressed.join('').slice(1) : pressed.join('') == "OKKO") okko(1);
+                if (pressed.join('').slice(1) == "OKKO") okko(1);
                 if (unlocked && [37, 39].indexOf(e.which) >= 0) {
                     $(element).removeClass("theme" + theme);
                     theme += e.which - 38;
@@ -83,7 +83,7 @@ function bcbCountdown(element, config, theme) {
 
     var tkos = 0;  
     function okko(skipNum) {
-        if ((tkos += skipNum) >= 3)
+        if ((tkos += skipNum) >= 2)
             $(document.head).append("<link rel='stylesheet' href='//thatswhatyouget.github.io/bcb-widgets/eggs/okko.css'/>");
     }
 
