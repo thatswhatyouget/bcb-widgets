@@ -62,12 +62,12 @@ ul.headlines li a, .feed-links, .feed-links a {
 }
 
 .post .post-footer a {
-    color: #fa69f9!important;
+    color:#35f28c!important;
 }
 
-.post .post-footer .post-footer-comment a {
+.post .post-footer .post-footer-comment a, a.button {
     background-color: #6006eb!important;
-    color: white!important;
+    color:#35f28c!important;
 }
 
 #header-bg-1,#header-bg-2,#header-bg-3,#header-bg-4 {
@@ -123,5 +123,5 @@ a[href='/search/label/Rebecca Sugar']:before {
     line-height:2.2em;
 }
 
-.bcbCountdown::before { background-image: url("icebear.jpg")!important; }
-.bcbCountdown::after { content:"Ice Bear is Excited"!important }
+/* .bcbCountdown::before { background-image: url("icebear.jpg")!important; }
+.bcbCountdown::after { content:"Ice Bear is Excited"!important } */
