@@ -45,17 +45,15 @@ ul.headlines li a, .feed-links, .feed-links a {
 }
 
 .module h1, div.settings h1, .blog-pager a {
-    background: #3bfbf9!important;
-    vertical-align: baseline;
-    color: #f9fa1b!important;
-    text-shadow: .1em 0 0 #fa69f9, .05em .1em 0 #6006eb!important;
-    text-transform: uppercase!important;
+    background-color: #6006eb!important;
+    color:#35f28c!important;
 }
 
-.post {
+.post, .post-comments, .module {
     border-color: #6f027c;
     background: #3bfbf9!important;
 }
+
 .post .post-footer {
     background-color:rgba(0,0,0,.3);
     color:white;
