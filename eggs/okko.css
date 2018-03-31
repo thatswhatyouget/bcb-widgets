@@ -73,7 +73,7 @@ ul.headlines li a, .feed-links, .feed-links a {
 #header-bg-1,#header-bg-2,#header-bg-3,#header-bg-4 {
     background-image:url("https://media.discordapp.net/attachments/259431839855411200/419340124388720658/Wiki-background.jpg")!important;
     background-size:cover;
-    background-position: center;
+    background-position: center!important;
 }
 
 #header-bg-4 a img {
@@ -83,7 +83,7 @@ ul.headlines li a, .feed-links, .feed-links a {
     padding-top:293px;
     background-image:url("https://cdn.discordapp.com/attachments/259431839855411200/422965248786563091/Lets_Blog_Heroes.png");
     background-size: contain;
-    background-position: center!important;
+    background-position: center;
     background-repeat: no-repeat;
     position: relative;
     top: 10px;
