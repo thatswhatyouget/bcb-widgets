@@ -121,5 +121,9 @@ a[href='/search/label/Rebecca Sugar']:before {
     line-height:2.2em;
 }
 
-/* .bcbCountdown::before { background-image: url("icebear.jpg")!important; }
-.bcbCountdown::after { content:"Ice Bear is Excited"!important } */
+.pds-box {
+    background: none!important;
+}
+
+.bcbCountdown::before { background-image: url("ko.png")!important; }
+.bcbCountdown::after { content:"Prepare for the heroics!"!important }
