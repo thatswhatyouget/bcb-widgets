@@ -53,7 +53,7 @@ Art.findAt = function (link) {
     }
     else {
         $.ajax({
-            url: "http://opengraph.io/api/1.0/site/" + encodeURI(link),
+            url: "https://opengraph.io/api/1.0/site/" + encodeURI(link),
             type: "GET",
             dataType: "json",
             timeout: 1000

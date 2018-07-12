@@ -14,7 +14,7 @@ angular.module('videoApp', [])
             return $sce.trustAsUrl('https://youtu.be/' + videoPost.getYoutubeId());
         }
         videoPost.getThumbnailUrl = function () {
-            return $sce.trustAsUrl('http://i3.ytimg.com/vi/' + videoPost.getYoutubeId() + '/');
+            return $sce.trustAsUrl('https://i3.ytimg.com/vi/' + videoPost.getYoutubeId() + '/');
         }
         videoPost.videoHeight = function () {
             return /*videoPost.thumbnailQuality == 'sd' ? 480 :*/ 360;

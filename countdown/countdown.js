@@ -79,7 +79,7 @@ function bcbCountdown(element, config, theme) {
                 }
             });
 
-    $('<a>').addClass('info').attr('title', "Inspired by Doafhat's countdown designs").attr('href', "http://doafhat.com/post/135588250298/all-the-edited-stevenbomb-4-countdowns-for-your").attr('target', '_blank').append($('<i>').addClass('fa fa-info-circle')).appendTo(element);
+    $('<a>').addClass('info').attr('title', "Inspired by Doafhat's countdown designs").attr('href', "https://doafhat.com/post/135588250298/all-the-edited-stevenbomb-4-countdowns-for-your").attr('target', '_blank').append($('<i>').addClass('fa fa-info-circle')).appendTo(element);
 
     var tkos = 0;  
     function okko(skipNum) {
@@ -103,12 +103,12 @@ function bcbCountdown(element, config, theme) {
             return $.when(
                 (function () {
                     var d = $.Deferred();
-                    $("<img>").attr('src', 'http://i.imgur.com/mN9KVNe.png').on('load', d.resolve);
+                    $("<img>").attr('src', 'https://i.imgur.com/mN9KVNe.png').on('load', d.resolve);
                     return d;
                 })(),
                 (function () {
                     var d = $.Deferred();
-                    $("<img>").attr('src', 'http://i.imgur.com/wvghkvg.png').on('load', d.resolve);
+                    $("<img>").attr('src', 'https://i.imgur.com/wvghkvg.png').on('load', d.resolve);
                     return d;
                 })());
         })().then(function () {

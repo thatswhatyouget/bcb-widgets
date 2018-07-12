@@ -256,15 +256,15 @@ function HitTheDiamond(selector) {
     instructions.append($("<ul class='instructions'>").append(gems.filter(function (g) { return g.score > 0 }).sort(function (a, b) { return b.score - a.score; }).map(gemIconMaker())));
     var gameovertext = "You scored %S points. %H Here's the damage:";
     var credits = $("<span>").text("Credits").append($("<ul>").addClass("credits").append([
-        { credit: "Design, Programming", by: "Dave", link: "http://www.beachcitybugle.com/" },
-        { credit: "Art, Sound", by: "Steven Universe", link: "http://www.cartoonnetwork.com/video/steven-universe/" },
+        { credit: "Design, Programming", by: "Dave", link: "https://www.beachcitybugle.com/" },
+        { credit: "Art, Sound", by: "Steven Universe", link: "https://www.cartoonnetwork.com/video/steven-universe/" },
         { credit: "Music", by: "Aivi & Surasshu", link: "https://soundcloud.com/aivisura/steven-universe-futurisms" },
         { credit: "Testing", by: "Emerald", link: "https://twitter.com/gaygemgoddess" },
-        { by: "Mynder", link: "http://mynder.deviantart.com/" },
+        { by: "Mynder", link: "https://mynder.deviantart.com/" },
         { by: "Calpain", link: "https://twitter.com/CalpainEqD" },
-        { credit: "Crewniverse Font", by: "MaxiGamer", link: "http://fav.me/d8xkpe8" },
-        { credit: "Yellow Pearl Vector", by: "Deco-kun", link: "http://steven-universe.wikia.com/wiki/User:Deco-kun" },
-        { credit: "Special Thanks", by: "Steven Universe Wiki", link: "http://steven-universe.wikia.com/" }
+        { credit: "Crewniverse Font", by: "MaxiGamer", link: "https://fav.me/d8xkpe8" },
+        { credit: "Yellow Pearl Vector", by: "Deco-kun", link: "https://steven-universe.wikia.com/wiki/User:Deco-kun" },
+        { credit: "Special Thanks", by: "Steven Universe Wiki", link: "https://steven-universe.wikia.com/" }
     ].map(function (c) {
         return $("<li>").append($("<span>").text(c.credit ? c.credit + ':' : "")).append($(c.link ? "<a target='_blank' href='" + c.link + "'>" : "<span>").text(c.by));
     })));

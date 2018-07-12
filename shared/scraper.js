@@ -5,13 +5,13 @@ function scrape(link) {
         return appScraper(link);
     }
     return $.ajax({
-        url: "http://crossorigin.me/" + link,
+        url: "https://crossorigin.me/" + link,
         type: "GET",
         dataType: "text",
         timeout: 5000
     }).then(function (r) { return r; }, function (e) {
         return $.ajax({
-            url: "http://cors.io/?u=" + link,
+            url: "https://cors.io/?u=" + link,
             type: "GET",
             dataType: "text",
             timeout: 5000
