@@ -11,6 +11,11 @@ body {
     color:#1a1a1a!important;
 }
 
+.post a {
+    color: #9eb565;
+    text-decoration:none;
+}
+
 a.nav-bar-button {
     color:#1a1a1a!important;
     text-shadow: 1px 1px rgba(255,255,255,0.3)!important;
@@ -43,6 +48,7 @@ ul.headlines li a, .feed-links, .feed-links a {
 .post {
     background: rgb(41, 50, 15)!important;
     border: 2px solid rgb(199, 82, 26)!important;
+    color: white;
 }
 
 .post .post-footer {
