@@ -8,7 +8,7 @@ body {
 } 
 
 .post .post-header h3 a:visited, .post .post-header h3 a:link {
-    color:#1a1a1a!important;
+    color:#6a9929!important;
 }
 
 .post a {
@@ -34,6 +34,10 @@ a.nav-bar-button:HOVER, .nav-bar .drop-down.hover a.nav-bar-button {
 
 ul.headlines li, .feed-links {
     background-color: rgba(255,255,255,255.5)!important;
+}
+
+ul.headlines li, .feed-links {
+    background: #6a9929!important;
 }
 
 ul.headlines li a, .feed-links, .feed-links a {
