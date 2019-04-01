@@ -8,11 +8,11 @@ body {
 } 
 
 .post .post-header h3 a:visited, .post .post-header h3 a:link {
-    background-color: #6a9929!important;
     color:#1a1a1a!important;
 }
 
 a.nav-bar-button {
+    color:#1a1a1a!important;
     text-shadow: 1px 1px rgba(255,255,255,0.3)!important;
     background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.40) 100%)!important;
 }
@@ -32,11 +32,14 @@ ul.headlines li, .feed-links {
 }
 
 ul.headlines li a, .feed-links, .feed-links a {
-    background-color: #6a9929!important;
     color:#1a1a1a!important;
 }
 
 .module h1, div.settings h1, .blog-pager a {
+    color:#1a1a1a!important;
+}
+
+.post .post-footer {
     background-color: #6a9929!important;
     color:#1a1a1a!important;
 }
