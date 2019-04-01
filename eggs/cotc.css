@@ -36,12 +36,26 @@ ul.headlines li a, .feed-links, .feed-links a {
 }
 
 .module h1, div.settings h1, .blog-pager a {
+    background: #6a9929!important;
     color:#1a1a1a!important;
+}
+
+.post {
+    background: rgb(41, 50, 15)!important;
+    border: 2px solid rgb(199, 82, 26)!important;
 }
 
 .post .post-footer {
     background-color: #6a9929!important;
     color:#1a1a1a!important;
+}
+
+.post .post-footer a:link {
+    color: darkblue;
+}
+
+.post .post-footer a:visited {
+    color: darkslateblue;
 }
 
 #header-bg-1,#header-bg-2,#header-bg-3,#header-bg-4 {
