@@ -32,11 +32,7 @@ a.nav-bar-button:HOVER, .nav-bar .drop-down.hover a.nav-bar-button {
     border-right: 1px solid rgba(255,255,255,0.3)!important;
 }
 
-ul.headlines li, .feed-links {
-    background-color: rgba(255,255,255,255.5)!important;
-}
-
-ul.headlines li, .feed-links {
+ul.headlines li, .feed-links, #HTML408 .module {
     background: #6a9929!important;
 }
 
@@ -112,4 +108,9 @@ a[href='/search/label/Drawing Things Out']:before {
 
 a[href='/search/label/Rebecca Sugar']:before {
     content:'CotC Fan Rebecca Sugar';
+}
+
+.drop-down-menu a:before {
+    font-size:14.8px;
+    line-height:2.2em;
 }
