@@ -54,7 +54,7 @@ function bcbCountdown(element, config, theme) {
             squishToFit($(element).find('.subtitle span'));
 
             var interval = setInterval(updateTime, 1000);
-            
+
         }
         catch (e) {
             if (typeof (debug) !== "undefined" && debug) {
@@ -64,33 +64,41 @@ function bcbCountdown(element, config, theme) {
     })();
 
     $(window).keydown(function (e) {
-                pressed.push(String.fromCharCode(e.which).toUpperCase());
-                if (pressed.length > 5) pressed.shift();
-                if (pressed.join('') == "SUGAR") unlocked = true;
-                if (pressed.join('') == "RIDOT") sneaky(1);
-                if (pressed.join('') == "BEARS") bears(1);
-                if (pressed.join('').slice(1) == "OKKO") okko(1);
-                if (unlocked && [37, 39].indexOf(e.which) >= 0) {
-                    $(element).removeClass("theme" + theme);
-                    theme += e.which - 38;
-                    theme %= themes;
-                    while (theme < 0) theme += themes;
-                    $(element).addClass("theme" + theme);
-                }
-            });
+        pressed.push(String.fromCharCode(e.which).toUpperCase());
+        if (pressed.length > 5) pressed.shift();
+        if (pressed.join('') == "SUGAR") unlocked = true;
+        if (pressed.join('') == "RIDOT") sneaky(1);
+        if (pressed.join('') == "BEARS") bears(1);
+        if (pressed.join('').slice(1) == "OKKO") okko(1);
+        if (pressed.join('') == "CREEK") creek(1);
+
+        if (unlocked && [37, 39].indexOf(e.which) >= 0) {
+            $(element).removeClass("theme" + theme);
+            theme += e.which - 38;
+            theme %= themes;
+            while (theme < 0) theme += themes;
+            $(element).addClass("theme" + theme);
+        }
+    });
 
     $('<a>').addClass('info').attr('title', "Inspired by Doafhat's countdown designs").attr('href', "https://doafhat.com/post/135588250298/all-the-edited-stevenbomb-4-countdowns-for-your").attr('target', '_blank').append($('<i>').addClass('fa fa-info-circle')).appendTo(element);
 
-    var tkos = 0;  
+    var tkos = 0;
     function okko(skipNum) {
         if ((tkos += skipNum) >= 2)
             $(document.head).append("<link rel='stylesheet' href='//thatswhatyouget.github.io/bcb-widgets/eggs/okko.css'/>");
     }
 
-    var numBears = 0;  
+    var numBears = 0;
     function bears(skipNum) {
         if ((numBears += skipNum) >= 3)
             $(document.head).append("<link rel='stylesheet' href='//thatswhatyouget.github.io/bcb-widgets/eggs/wbb.css'/>");
+    }
+
+    var gallons = 0;
+    function creek(skipNum) {
+        if ((gallons += skipNum) >= 3)
+            $(document.head).append("<link rel='stylesheet' href='//thatswhatyouget.github.io/bcb-widgets/eggs/cotc.css'/>");
     }
 
     var peridinkles = 0;
